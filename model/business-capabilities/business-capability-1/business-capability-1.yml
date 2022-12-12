@@ -1,0 +1,11 @@
+ncore-composite:
+  name: Business Capability 1
+  id: business-capability-one
+  documentation: 
+    content-markdown:
+      style: true
+      source:
+        content-resource: 
+          location: readme.md
+          interpolate: true
+  

@@ -1,0 +1,11 @@
+ncore-composite:
+  name: AWS
+  id: aws
+  documentation: 
+    content-markdown:
+      style: true
+      source:
+        content-resource: 
+          location: aws.md
+          interpolate: true
+  

@@ -1,0 +1,1 @@
+Business capbilities - building blocks for offerings, leverage technical capabilties.
