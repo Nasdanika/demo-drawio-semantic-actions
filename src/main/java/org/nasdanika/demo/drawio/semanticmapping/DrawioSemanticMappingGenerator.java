@@ -59,6 +59,7 @@ import org.nasdanika.common.PropertyComputer;
 import org.nasdanika.common.Status;
 import org.nasdanika.common.Supplier;
 import org.nasdanika.common.SupplierFactory;
+import org.nasdanika.drawio.Connection;
 import org.nasdanika.drawio.Layer;
 import org.nasdanika.drawio.LayerElement;
 import org.nasdanika.drawio.Page;
@@ -545,24 +546,42 @@ public class DrawioSemanticMappingGenerator {
 						return ol;
 					}
 					
-					if (element instanceof Layer) {
+					if (element instanceof Layer) { // Including nodes
 						List<LayerElement> layerElements = new ArrayList<>(((Layer) element).getElements());
 						Collections.sort(layerElements, new LabelModelElementComparator(false));
+						if (element instanceof org.nasdanika.drawio.Node) {
+							List<LayerElement> outgoingConnections = new ArrayList<>(((org.nasdanika.drawio.Node) element).getOutgoingConnections());
+							Collections.sort(outgoingConnections, new LabelModelElementComparator(false));
+							layerElements.addAll(outgoingConnections);
+							
+							for (LayerElement oc: outgoingConnections) {								
+								String ocLabel = oc.getLabel();
+								if (oc instanceof Connection && !org.nasdanika.common.Util.isBlank(ocLabel)) {
+									System.out.println(((Connection) oc).getSource());
+								}								
+							}
+						}
+						
 						Tag ol = htmlFactory.tag(TagName.ol);
 						for (LayerElement layerElement: layerElements) {
-							if (org.nasdanika.common.Util.isBlank(layerElement.getLabel())) {
-								ol.content(apply(layerElement));
-							} else {
-								Tag li = htmlFactory.tag(
-										TagName.li,
-										org.nasdanika.common.Util.isBlank(layerElement.getLink()) || layerElement.getLinkedPage() != null ? Jsoup.parse(layerElement.getLabel()).text() : htmlFactory.tag(TagName.a, Jsoup.parse(layerElement.getLabel()).text()).attribute("href", layerElement.getLink()),										
-										org.nasdanika.common.Util.isBlank(layerElement.getTooltip()) ? "" : " - " + Jsoup.parse(layerElement.getTooltip()).text() ,
-										apply(layerElement));
-								ol.content(li);								
-							}							
+							if (layerElement instanceof org.nasdanika.drawio.Node || (layerElement instanceof Connection && (((Connection) layerElement).getSource() == null || ((Connection) layerElement).getSource() == element))) {
+								if (org.nasdanika.common.Util.isBlank(layerElement.getLabel())) { 
+									ol.content(apply(layerElement));
+								} else {
+									Tag li = htmlFactory.tag(
+											TagName.li,
+											org.nasdanika.common.Util.isBlank(layerElement.getLink()) || layerElement.getLinkedPage() != null ? Jsoup.parse(layerElement.getLabel()).text() : htmlFactory.tag(TagName.a, Jsoup.parse(layerElement.getLabel()).text()).attribute("href", layerElement.getLink()),										
+											org.nasdanika.common.Util.isBlank(layerElement.getTooltip()) ? "" : " - " + Jsoup.parse(layerElement.getTooltip()).text() ,
+											apply(layerElement));
+									ol.content(li);								
+								}
+							}
 						}
-						return ol;
-						
+						return ol;						
+					}
+					
+					if (element instanceof Connection && !org.nasdanika.common.Util.isBlank(((Connection) element).getLabel())) { 
+						System.out.println(((Connection) element).getSource());
 					}
 					
 					return null; 
@@ -604,9 +623,9 @@ public class DrawioSemanticMappingGenerator {
 								HTMLFactory htmlFactory = propertyComputerContext.get(HTMLFactory.class, HTMLFactory.INSTANCE);
 								URI targetActionURI = uriResolver.apply(targetAction, bURI);
 								Tag tag = htmlFactory.tag(targetActionURI == null ? TagName.span : TagName.a, spaceIdx == -1 ? targetAction.getText() : path.substring(spaceIdx + 1));
-								String targetActionDescription = targetAction.getDescription();
-								if (!org.nasdanika.common.Util.isBlank(targetActionDescription)) {
-									tag.attribute("title", targetActionDescription);
+								String targetActionTooltip = targetAction.getTooltip();
+								if (!org.nasdanika.common.Util.isBlank(targetActionTooltip)) {
+									tag.attribute("title", targetActionTooltip);
 								}
 								if (targetActionURI != null) {
 									tag.attribute("href", targetActionURI.toString());
