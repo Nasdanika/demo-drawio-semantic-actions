@@ -553,13 +553,6 @@ public class DrawioSemanticMappingGenerator {
 							List<LayerElement> outgoingConnections = new ArrayList<>(((org.nasdanika.drawio.Node) element).getOutgoingConnections());
 							Collections.sort(outgoingConnections, new LabelModelElementComparator(false));
 							layerElements.addAll(outgoingConnections);
-							
-							for (LayerElement oc: outgoingConnections) {								
-								String ocLabel = oc.getLabel();
-								if (oc instanceof Connection && !org.nasdanika.common.Util.isBlank(ocLabel)) {
-									System.out.println(((Connection) oc).getSource());
-								}								
-							}
 						}
 						
 						Tag ol = htmlFactory.tag(TagName.ol);
@@ -578,10 +571,6 @@ public class DrawioSemanticMappingGenerator {
 							}
 						}
 						return ol;						
-					}
-					
-					if (element instanceof Connection && !org.nasdanika.common.Util.isBlank(((Connection) element).getLabel())) { 
-						System.out.println(((Connection) element).getSource());
 					}
 					
 					return null; 
