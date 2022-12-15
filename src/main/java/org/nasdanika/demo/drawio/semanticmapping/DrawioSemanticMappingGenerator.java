@@ -591,7 +591,14 @@ public class DrawioSemanticMappingGenerator {
 				}
 			}
 			
-			Optional<URI> baseSemanticURI = registry.entrySet().stream().filter(e -> Objects.equals(e.getValue().getUuid(), action.getUuid())).map(e -> NcoreUtil.getUri(e.getKey())).filter(u -> !u.isRelative()).findFirst();									
+			Optional<URI> baseSemanticURI = registry
+					.entrySet()
+					.stream()
+					.filter(e -> Objects.equals(e.getValue().getUuid(), action.getUuid()))
+					.map(e -> NcoreUtil.getUri(e.getKey()))
+					.filter(Objects::nonNull)
+					.filter(u -> !u.isRelative())
+					.findFirst();									
 			
 			PropertyComputer semanticLinkPropertyComputer = new PropertyComputer() {
 				
