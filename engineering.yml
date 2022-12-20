@@ -1,6 +1,6 @@
 engineering-product:
-  name: Actions
-  path: actions
+  name: Semantic Mapping
+  path: semantic-mapping
   documentation:
     content-interpolator:
       source:
