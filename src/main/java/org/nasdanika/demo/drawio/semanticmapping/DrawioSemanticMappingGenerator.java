@@ -595,7 +595,7 @@ public class DrawioSemanticMappingGenerator {
 					.entrySet()
 					.stream()
 					.filter(e -> Objects.equals(e.getValue().getUuid(), action.getUuid()))
-					.map(e -> NcoreUtil.getUri(e.getKey()))
+					.flatMap(e -> NcoreUtil.getUris(e.getKey()).stream())
 					.filter(Objects::nonNull)
 					.filter(u -> !u.isRelative())
 					.findFirst();									
@@ -613,20 +613,21 @@ public class DrawioSemanticMappingGenerator {
 						}	
 						URI bURI = uriResolver.apply(action, (URI) null);						
 						for (Entry<EObject, Action> registryEntry: registry.entrySet()) {
-							URI semanticURI = NcoreUtil.getUri(registryEntry.getKey());
-							if (Objects.equals(targetURI, semanticURI)) {
-								Action targetAction = registryEntry.getValue();
-								HTMLFactory htmlFactory = propertyComputerContext.get(HTMLFactory.class, HTMLFactory.INSTANCE);
-								URI targetActionURI = uriResolver.apply(targetAction, bURI);
-								Tag tag = htmlFactory.tag(targetActionURI == null ? TagName.span : TagName.a, spaceIdx == -1 ? targetAction.getText() : path.substring(spaceIdx + 1));
-								String targetActionTooltip = targetAction.getTooltip();
-								if (!org.nasdanika.common.Util.isBlank(targetActionTooltip)) {
-									tag.attribute("title", targetActionTooltip);
+							for (URI semanticURI: NcoreUtil.getUris(registryEntry.getKey())) {
+								if (Objects.equals(targetURI, semanticURI)) {
+									Action targetAction = registryEntry.getValue();
+									HTMLFactory htmlFactory = propertyComputerContext.get(HTMLFactory.class, HTMLFactory.INSTANCE);
+									URI targetActionURI = uriResolver.apply(targetAction, bURI);
+									Tag tag = htmlFactory.tag(targetActionURI == null ? TagName.span : TagName.a, spaceIdx == -1 ? targetAction.getText() : path.substring(spaceIdx + 1));
+									String targetActionTooltip = targetAction.getTooltip();
+									if (!org.nasdanika.common.Util.isBlank(targetActionTooltip)) {
+										tag.attribute("title", targetActionTooltip);
+									}
+									if (targetActionURI != null) {
+										tag.attribute("href", targetActionURI.toString());
+									}
+									return (T) tag.toString(); 
 								}
-								if (targetActionURI != null) {
-									tag.attribute("href", targetActionURI.toString());
-								}
-								return (T) tag.toString(); 
 							}
 						}
 					}
@@ -648,12 +649,13 @@ public class DrawioSemanticMappingGenerator {
 						}	
 						URI bURI = uriResolver.apply(action, (URI) null);						
 						for (Entry<EObject, Action> registryEntry: registry.entrySet()) {
-							URI semanticURI = NcoreUtil.getUri(registryEntry.getKey());
-							if (Objects.equals(targetURI, semanticURI)) {
-								Action targetAction = registryEntry.getValue();
-								URI targetActionURI = uriResolver.apply(targetAction, bURI);
-								if (targetActionURI != null) {
-									return (T) targetActionURI.toString();
+							for (URI semanticURI: NcoreUtil.getUris(registryEntry.getKey())) {
+								if (Objects.equals(targetURI, semanticURI)) {
+									Action targetAction = registryEntry.getValue();
+									URI targetActionURI = uriResolver.apply(targetAction, bURI);
+									if (targetActionURI != null) {
+										return (T) targetActionURI.toString();
+									}
 								}
 							}
 						}
