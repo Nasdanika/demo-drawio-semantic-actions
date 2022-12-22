@@ -597,7 +597,7 @@ public class DrawioSemanticMappingGenerator {
 					.filter(e -> Objects.equals(e.getValue().getUuid(), action.getUuid()))
 					.flatMap(e -> NcoreUtil.getUris(e.getKey()).stream())
 					.filter(Objects::nonNull)
-					.filter(u -> !u.isRelative())
+					.filter(u -> !u.isRelative() && u.isHierarchical())
 					.findFirst();									
 			
 			PropertyComputer semanticLinkPropertyComputer = new PropertyComputer() {
