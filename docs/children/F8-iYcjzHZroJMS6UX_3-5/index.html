@@ -72,11 +72,11 @@ window.nsdJsTreeSearchCallback = function(str, node) {
     <div class="container-fluid nsd-app-container">
       <div class="row">
         <div class="col nsd-app-header">
-          <a href="https://www.nasdanika.org" title="Root action" data-nsd-action-uuid="ab408e1b-d30e-4e79-bdc2-9a3d585364c4" class="nsd-app-header-title">
+          <a href="https://www.nasdanika.org" title="Root action" data-nsd-action-uuid="51f7a4b1-e33c-4feb-a375-ead09520f81c" class="nsd-app-header-title">
             <img src="https://docs.nasdanika.org/images/nasdanika-logo.png" class="nsd-app-label-icon">Nasdanika</a>
           <ul class="nav nsd-app-header-navs">
             <li class="nav-item">
-              <a href="../../search.html" data-nsd-action-uuid="7e109930-0d78-472c-a1a5-489cf2bf8b78" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
+              <a href="../../search.html" data-nsd-action-uuid="b48a9789-da6e-4de1-8325-fecbda307037" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
             </li>
           </ul>
         </div>
@@ -84,13 +84,13 @@ window.nsdJsTreeSearchCallback = function(str, node) {
       <div class="row">
         <div class="col nsd-app-navbar">
           <ul class="navbar navbar-light navbar-expand-lg">
-            <a href="../../index.html" data-nsd-action-uuid="99a921c2-054e-4a1e-b6f0-c64bc944a88f" class="navbar-brand">Semantic Mapping Demo</a>
-            <button type="button" data-toggle="collapse" data-target="#nsd_u" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+            <a href="../../index.html" data-nsd-action-uuid="2d9e0844-7394-474b-b579-1feb537579a8" class="navbar-brand">Semantic Mapping Demo</a>
+            <button type="button" data-toggle="collapse" data-target="#nsd_4q" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
             </button>
-            <div id="nsd_u" class="collapse navbar-collapse">
+            <div id="nsd_4q" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a href="../../info.html" data-nsd-action-uuid="bd3b83e6-0f77-4b7d-bd37-b0a5c8e0d820" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
+                  <a href="../../info.html" data-nsd-action-uuid="3ffb1ded-9dba-4ff0-89aa-e05d73b75f48" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
                 </li>
               </ul>
             </div>
@@ -102,13 +102,13 @@ window.nsdJsTreeSearchCallback = function(str, node) {
           <input type="text" id="8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput" title="Full-text search. You can use wildcards, e.g. 'foo*' or 'f*o'; title or content fields, e.g. 'title:foo* bar'; boosts, e.g. 'foo^10 bar'; fuzzy matches, e.g. 'foo~1'; and term presence, e.g. '+foo bar -baz'" class="form-control mt-1">
           <div id="8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"></div>
           <script>$(document).ready( function() {
-$('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='../infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='../infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='../infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='../infrastructure/children/cloud/children/public/children/aws/index.html';"},"id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","data-nsd-action-uuid":"07ac4308-315e-47cb-9130-86b49affaf81","type":"leaf"}],"id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public","data-nsd-action-uuid":"8aa1ba70-47b2-4e8e-8a47-701c1f463315"}],"id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud","data-nsd-action-uuid":"a32bd824-7057-49f5-b661-30b1191c0d8f"}],"id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure","data-nsd-action-uuid":"b4ac95d0-9edc-4ca9-971d-10bf7f5efc75"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='../business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='../business-capabilties/children/business-capability-one/index.html';"},"id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","data-nsd-action-uuid":"01f8efa3-9dfc-47d3-9c89-900726e74035","type":"leaf"}],"id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities","data-nsd-action-uuid":"ed1926f4-007f-4726-a221-03cc603bcc64"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","data-nsd-action-uuid":"4ffcc665-a010-4885-90b7-84939a12ea8e","type":"leaf"}],"state":{"selected":true},"id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings","data-nsd-action-uuid":"29daf185-7936-48b2-bab1-57a659079a90"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
+$('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='../infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='../infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='../infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='../infrastructure/children/cloud/children/public/children/aws/index.html';"},"id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","data-nsd-action-uuid":"c49f1316-2b92-4660-b3ba-aa7e437caaf7","type":"leaf"}],"id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public","data-nsd-action-uuid":"1380e38b-b5fe-4767-969c-880975c561c0"}],"id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud","data-nsd-action-uuid":"fb4427db-6d8b-4ccf-987b-cf71bb51813f"}],"id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure","data-nsd-action-uuid":"156b95e4-2348-4282-a4c1-915e9eae47f4"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='../business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='../business-capabilties/children/business-capability-one/index.html';"},"id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","data-nsd-action-uuid":"4b6a6050-2d27-471a-b54b-8ac905de4a09","type":"leaf"}],"id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities","data-nsd-action-uuid":"ae6f1f02-0b94-4ea7-a8eb-33701997910e"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","data-nsd-action-uuid":"d0bc7eab-7cb3-4299-bb5f-a53a0089a1d5","type":"leaf"}],"state":{"selected":true},"id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings","data-nsd-action-uuid":"d45749aa-3620-47f3-821b-7c57819f683e"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
 // Tokens: searchInputSelector, timer, treeSelector
 $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').keyup(function () {
-    if (window['nsd_jstTreeSearchTimer_nsd_13']) { 
-		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_13']); 
+    if (window['nsd_jstTreeSearchTimer_nsd_4z']) { 
+		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_4z']); 
 	}
-    window['nsd_jstTreeSearchTimer_nsd_13'] = setTimeout(function () {
+    window['nsd_jstTreeSearchTimer_nsd_4z'] = setTimeout(function () {
       var v = $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').val();
       $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(true).search(v);
     }, 250);
@@ -116,17 +116,17 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
 
 });</script>
         </div>
-        <div data-nsd-action-uuid="29daf185-7936-48b2-bab1-57a659079a90" class="col nsd-app-content-panel">
+        <div data-nsd-action-uuid="d45749aa-3620-47f3-821b-7c57819f683e" class="col nsd-app-content-panel">
           <div class="container-fluid">
             <div class="row nsd-app-content-panel-title-and-items-row">
               <div class="col-auto">
-                <h1><span title="Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks." data-nsd-action-uuid="29daf185-7936-48b2-bab1-57a659079a90" class="nsd-app-content-panel-title">Offerings</span>
+                <h1><span title="Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks." data-nsd-action-uuid="d45749aa-3620-47f3-821b-7c57819f683e" class="nsd-app-content-panel-title">Offerings</span>
                 </h1>
               </div>
               <div class="col">
                 <ul class="nav nsd-app-content-panel-navs">
                   <li class="nav-item">
-                    <a href="info.html" data-nsd-action-uuid="9600f617-b95d-40e9-9d85-b1b9bd9ec25d" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
+                    <a href="info.html" data-nsd-action-uuid="3642267d-aa31-4798-b753-fc9f551f8ac0" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
                   </li>
                 </ul>
               </div>
@@ -148,12 +148,12 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
         <div class="col nsd-app-footer">
           <ul class="nav nsd-app-footer-navs">
             <li class="nav-item">
-              <a href="https://github.com/Nasdanika/demo-drawio-actions" data-nsd-action-uuid="6585159e-d129-4291-9790-02ffc47cedee" class="nav-link"><span class="fab fa-github nsd-app-label-icon"></span>Source</a>
+              <a href="https://github.com/Nasdanika/demo-drawio-actions" data-nsd-action-uuid="fa392f58-3ef0-4a15-964b-09e47bc64bdc" class="nav-link"><span class="fab fa-github nsd-app-label-icon"></span>Source</a>
             </li>
             <li class="nav-item"><span class="navbar-text">&nbsp;•&nbsp;</span>
             </li>
             <li class="nav-item">
-              <a href="https://docs.nasdanika.org/modules/demos/modules/app-drawio/modules/actions/index.html" data-nsd-action-uuid="1ef5a4fa-5e0b-4fef-90d3-10ce6f5b2018" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Documentation</a>
+              <a href="https://docs.nasdanika.org/modules/demos/modules/app-drawio/modules/actions/index.html" data-nsd-action-uuid="c7bbfae1-5f6a-4369-8fd3-d64e96feba63" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Documentation</a>
             </li>
           </ul>
         </div>
