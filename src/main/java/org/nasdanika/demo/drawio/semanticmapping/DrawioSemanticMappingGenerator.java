@@ -1,17 +1,13 @@
 package org.nasdanika.demo.drawio.semanticmapping;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.UUID;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -43,8 +37,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.nasdanika.common.ConsumerFactory;
 import org.nasdanika.common.Context;
 import org.nasdanika.common.DefaultConverter;
@@ -66,18 +58,11 @@ import org.nasdanika.drawio.Page;
 import org.nasdanika.drawio.comparators.LabelModelElementComparator;
 import org.nasdanika.emf.EObjectAdaptable;
 import org.nasdanika.emf.EmfUtil;
-import org.nasdanika.emf.persistence.EObjectLoader;
-import org.nasdanika.emf.persistence.GitMarkerFactory;
-import org.nasdanika.emf.persistence.MarkerFactory;
-import org.nasdanika.emf.persistence.NcoreDrawioResourceFactory;
 import org.nasdanika.emf.persistence.NcoreObjectLoaderSupplier;
-import org.nasdanika.exec.ExecPackage;
 import org.nasdanika.exec.content.ContentFactory;
-import org.nasdanika.exec.content.ContentPackage;
 import org.nasdanika.exec.resources.Container;
 import org.nasdanika.exec.resources.ReconcileAction;
 import org.nasdanika.exec.resources.ResourcesFactory;
-import org.nasdanika.exec.resources.ResourcesPackage;
 import org.nasdanika.html.HTMLFactory;
 import org.nasdanika.html.Tag;
 import org.nasdanika.html.TagName;
@@ -88,7 +73,6 @@ import org.nasdanika.html.jstree.JsTreeFactory;
 import org.nasdanika.html.jstree.JsTreeNode;
 import org.nasdanika.html.model.app.Action;
 import org.nasdanika.html.model.app.AppFactory;
-import org.nasdanika.html.model.app.AppPackage;
 import org.nasdanika.html.model.app.Label;
 import org.nasdanika.html.model.app.Link;
 import org.nasdanika.html.model.app.gen.ActionContentProvider;
@@ -99,19 +83,13 @@ import org.nasdanika.html.model.app.gen.PageContentProvider;
 import org.nasdanika.html.model.app.gen.Util;
 import org.nasdanika.html.model.app.util.ActionProvider;
 import org.nasdanika.html.model.app.util.AppObjectLoaderSupplier;
-import org.nasdanika.html.model.bootstrap.BootstrapPackage;
-import org.nasdanika.html.model.html.HtmlPackage;
 import org.nasdanika.html.model.html.gen.ContentConsumer;
-import org.nasdanika.ncore.NcorePackage;
 import org.nasdanika.ncore.util.NcoreResourceSet;
 import org.nasdanika.ncore.util.NcoreUtil;
-import org.nasdanika.persistence.ObjectLoaderResourceFactory;
 import org.nasdanika.resources.BinaryEntityContainer;
 import org.nasdanika.resources.FileSystemContainer;
 
 import com.redfin.sitemapgenerator.ChangeFreq;
-import com.redfin.sitemapgenerator.WebSitemapGenerator;
-import com.redfin.sitemapgenerator.WebSitemapUrl;
 
 public class DrawioSemanticMappingGenerator {
 
@@ -133,7 +111,7 @@ public class DrawioSemanticMappingGenerator {
 	protected void loadSemanticModel(String name, Context context, ProgressMonitor progressMonitor) throws Exception {
 		URI resourceURI = URI.createFileURI(new File("model/" + name).getAbsolutePath());
 		
-		ResourceSet rSet = createResourceSet(context, progressMonitor);
+		ResourceSet rSet = Util.createResourceSet(progressMonitor);
 		
 		Supplier<EObject> ncoreObjectLoaderSupplier = new NcoreObjectLoaderSupplier(resourceURI, context) {
 			
@@ -207,69 +185,12 @@ public class DrawioSemanticMappingGenerator {
 		}
 	}
 		
-	public static void copy(File source, File target, boolean cleanTarget, BiConsumer<File,File> listener) throws IOException {
-		if (cleanTarget && target.isDirectory()) {
-			delete(target.listFiles());
-		}
-		if (source.isDirectory()) {
-			target.mkdirs();
-			for (File sc: source.listFiles()) {
-				copy(sc, new File(target, sc.getName()), false, listener);
-			}
-		} else if (source.isFile()) {
-			Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);			
-			if (listener != null) {
-				listener.accept(source, target);
-			}
-		}
-	}
-	
-	private static void delete(File... files) {
-		for (File file: files) {
-			if (file.exists()) {
-				if (file.isDirectory()) {
-					delete(file.listFiles());
-				}
-				file.delete();
-			}
-		}
-	}
-		
-	private static void copy(File source, File target, boolean cleanTarget, Predicate<String> cleanPredicate, BiConsumer<File,File> listener) throws IOException {
-		if (cleanTarget && target.isDirectory()) {
-			delete(null, cleanPredicate, target.listFiles());
-		}
-		if (source.isDirectory()) {
-			target.mkdirs();
-			for (File sc: source.listFiles()) {
-				copy(sc, new File(target, sc.getName()), false, listener);
-			}
-		} else if (source.isFile()) {
-			Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);			
-			if (listener != null) {
-				listener.accept(source, target);
-			}
-		}
-	}
-	
-	private static void delete(String path, Predicate<String> deletePredicate, File... files) {
-		for (File file: files) {
-			String filePath = path == null ? file.getName() : path + "/" + file.getName();
-			if (file.exists() && (deletePredicate == null || deletePredicate.test(filePath))) {
-				if (file.isDirectory()) {
-					delete(filePath, deletePredicate, file.listFiles());
-				}
-				file.delete();
-			}
-		}
-	}	
-		
 	/**
 	 * Loads instance model from previously generated XMI, diagnoses, generates action model.
 	 * @throws Exception
 	 */
 	public Map<EObject,Action>  generateActionModel(String name, Context context, ProgressMonitor progressMonitor) throws Exception {
-		ResourceSet instanceModelsResourceSet = createResourceSet(context, progressMonitor);
+		ResourceSet instanceModelsResourceSet = Util.createResourceSet(progressMonitor);
 		Resource instanceModelResource = instanceModelsResourceSet.getResource(URI.createURI(name + ".xml").resolve(MODELS_URI), true);
 
 		org.eclipse.emf.common.util.Diagnostic instanceDiagnostic = org.nasdanika.emf.EmfUtil.resolveClearCacheAndDiagnose(instanceModelsResourceSet, context);
@@ -324,7 +245,7 @@ public class DrawioSemanticMappingGenerator {
 			
 		});
 		
-		ResourceSet actionModelsResourceSet = createResourceSet(context, progressMonitor);
+		ResourceSet actionModelsResourceSet = Util.createResourceSet(progressMonitor);
 		actionModelsResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(org.eclipse.emf.ecore.resource.Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		
 		org.eclipse.emf.ecore.resource.Resource actionModelResource = actionModelsResourceSet.createResource(URI.createURI(name + ".xml").resolve(ACTION_MODELS_URI));
@@ -358,26 +279,6 @@ public class DrawioSemanticMappingGenerator {
 		return registry;
 	}
 	
-	protected EObject loadObject(
-			String resource, 
-			Consumer<org.nasdanika.common.Diagnostic> diagnosticConsumer,
-			Context context,
-			ProgressMonitor progressMonitor) throws Exception {
-		
-		URI resourceURI = URI.createFileURI(new File(resource).getAbsolutePath());
-				
-		// Diagnosing loaded resources. 
-		try {
-			return Objects.requireNonNull(org.nasdanika.common.Util.call(new AppObjectLoaderSupplier(resourceURI, context), progressMonitor, diagnosticConsumer), "Loaded null from " + resource);
-		} catch (DiagnosticException e) {
-			System.err.println("******************************");
-			System.err.println("*      Diagnostic failed     *");
-			System.err.println("******************************");
-			e.getDiagnostic().dump(System.err, 4, Status.FAIL);
-			throw e;
-		}		
-	}
-	
 	/**
 	 * Generates a resource model from an action model.
 	 * @throws Exception
@@ -397,7 +298,7 @@ public class DrawioSemanticMappingGenerator {
 		
 		Context modelContext = Context.singleton("model-name", name);
 		String actionsResource = "model/root-action.yml";
-		Action root = (Action) Objects.requireNonNull(loadObject(actionsResource, diagnosticConsumer, modelContext, progressMonitor), "Loaded null from " + actionsResource);
+		Action root = (Action) Objects.requireNonNull(AppObjectLoaderSupplier.loadObject(actionsResource, diagnosticConsumer, modelContext, progressMonitor), "Loaded null from " + actionsResource);
 		root.eResource().getResourceSet().getAdapterFactories().add(new AppAdapterFactory());
 		
 		Container container = ResourcesFactory.eINSTANCE.createContainer();
@@ -410,7 +311,7 @@ public class DrawioSemanticMappingGenerator {
 		modelResource.getContents().add(container);
 		
 		String pageTemplateResource = "model/page-template.yml";
-		org.nasdanika.html.model.bootstrap.Page pageTemplate = (org.nasdanika.html.model.bootstrap.Page) Objects.requireNonNull(loadObject(pageTemplateResource, diagnosticConsumer, modelContext, progressMonitor), "Loaded null from " + pageTemplateResource);
+		org.nasdanika.html.model.bootstrap.Page pageTemplate = (org.nasdanika.html.model.bootstrap.Page) Objects.requireNonNull(AppObjectLoaderSupplier.loadObject(pageTemplateResource, diagnosticConsumer, modelContext, progressMonitor), "Loaded null from " + pageTemplateResource);
 		
 		File contentDir = new File(RESOURCE_MODELS_DIR, "content");
 		contentDir.mkdirs();
@@ -749,7 +650,7 @@ public class DrawioSemanticMappingGenerator {
 	 * @throws Exception
 	 */
 	public void generateContainer(String name, Context context, ProgressMonitor progressMonitor) throws Exception {
-		ResourceSet resourceSet = createResourceSet(context, progressMonitor);
+		ResourceSet resourceSet = Util.createResourceSet(progressMonitor);
 		
 		resourceSet.getAdapterFactories().add(new AppAdapterFactory());
 				
@@ -791,152 +692,34 @@ public class DrawioSemanticMappingGenerator {
 		};
 
 		File docsDir = new File("docs");
-		copy(new File(siteDir, "high-level-architecture.drawio"), docsDir, true, cleanPredicate, null);
+		org.nasdanika.common.Util.copy(new File(siteDir, "high-level-architecture.drawio"), docsDir, true, cleanPredicate, null);
 		
 		generateSitemapAndSearch(docsDir);
 	}
-
+	
 	private void generateSitemapAndSearch(File docsDir) throws IOException {
 		int[] problems = { 0 };
 		
-		// Site map and search index
-		JSONObject searchDocuments = new JSONObject();		
-		String domain = "https://docs.nasdanika.org";
-		WebSitemapGenerator wsg = new WebSitemapGenerator(domain, docsDir);
-		BiConsumer<File, String> listener = new BiConsumer<File, String>() {
-			
-			@Override
-			public void accept(File file, String path) {
-				if (path.endsWith(".html")) {
-					try {
-						WebSitemapUrl url = new WebSitemapUrl.Options(domain + "/" + path)
-							    .lastMod(new Date(file.lastModified())).changeFreq(ChangeFreq.WEEKLY).build();
-						wsg.addUrl(url); 
-					} catch (MalformedURLException e) {
-						throw new NasdanikaException(e);
-					}
-					
-					// Excluding search.html and aggregator pages which contain information present elsewhere
-					if (!"search.html".equals(path)
-							&& !"all-issues.html".equals(path)
-							&& !"issues.html".equals(path)
-							&& !"assignments.html".equals(path)
-							&& !path.endsWith("/all-issues.html")
-							&& !path.endsWith("/issues.html")
-							&& !path.endsWith("/assignments.html")
-							&& !path.endsWith("-load-specification.html")
-							&& !path.endsWith("-all-operations.html")
-							&& !path.endsWith("-all-attributes.html")
-							&& !path.endsWith("-all-references.html")
-							&& !path.endsWith("-all-supertypes.html")) {
-
-						try {
-							Predicate<String> predicate = org.nasdanika.html.model.app.gen.Util.createRelativeLinkPredicate(file, docsDir);						
-							Consumer<? super Element> inspector = org.nasdanika.html.model.app.gen.Util.createInspector(predicate, error -> {
-								System.err.println("[" + path +"] " + error);
-								++problems[0];
-							});
-							
-							JSONObject searchDocument = org.nasdanika.html.model.app.gen.Util.createSearchDocument(path, file, inspector, DrawioSemanticMappingGenerator.this::configureSearch);
-							if (searchDocument != null) {
-								searchDocuments.put(path, searchDocument);
-							}
-						} catch (IOException e) {
-							throw new NasdanikaException(e);
-						}
-					}
-				}
-			}
-		};
-		org.nasdanika.common.Util.walk(null, listener, docsDir.listFiles());
-		wsg.write();	
-
-		try (FileWriter writer = new FileWriter(new File(docsDir, "search-documents.js"))) {
-			writer.write("var searchDocuments = " + searchDocuments);
-		}
+		Util.generateSitemapAndSearch(
+				docsDir, 
+				"https://docs.nasdanika.org/demo-drawio-semantic-mapping", 
+				(file, path) -> path.endsWith(".html"), 
+				ChangeFreq.WEEKLY, 
+				(file, path) -> path.endsWith(".html") && !"search.html".equals(path), 
+				(path, error) -> {
+					System.err.println("[" + path +"] " + error);
+					++problems[0];
+				});
 		
 		if (problems[0] != 0) {
 			throw new ExecutionException("There are problems with pages: " + problems[0]);
 		};
 	}
 	
-	protected boolean configureSearch(String path, Document doc) {
-		Element head = doc.head();
-		URI base = URI.createURI("temp://" + UUID.randomUUID() + "/");
-		URI searchScriptURI = URI.createURI("search-documents.js").resolve(base);
-		URI thisURI = URI.createURI(path).resolve(base);
-		URI relativeSearchScriptURI = searchScriptURI.deresolve(thisURI, true, true, true);
-		head.append(System.lineSeparator() + "<script src=\"" + relativeSearchScriptURI + "\"></script>" + System.lineSeparator());
-		head.append(System.lineSeparator() + "<script src=\"https://unpkg.com/lunr/lunr.js\"></script>" + System.lineSeparator());
-				
-		try (InputStream in = new FileInputStream("model/search.js")) {
-			head.append(System.lineSeparator() + "<script>" + System.lineSeparator() + DefaultConverter.INSTANCE.toString(in) + System.lineSeparator() + "</script>" + System.lineSeparator());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return true;
-	}
-		
-	private static ResourceSet createResourceSet(Context context, ProgressMonitor progressMonitor) {
-		// Load model from XMI
-		ResourceSet resourceSet = new NcoreResourceSet();
-		
-		EObjectLoader eObjectLoader = new EObjectLoader(null, null, resourceSet);
-		GitMarkerFactory markerFactory = new GitMarkerFactory();
-		eObjectLoader.setMarkerFactory(markerFactory);
-		Resource.Factory objectLoaderResourceFactory = new ObjectLoaderResourceFactory() {
-			
-			@Override
-			protected org.nasdanika.persistence.ObjectLoader getObjectLoader(Resource resource) {
-				return eObjectLoader;
-			}
-			
-		};
-		Map<String, Object> extensionToFactoryMap = resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
-		extensionToFactoryMap.put("yml", objectLoaderResourceFactory);
-		extensionToFactoryMap.put("json", objectLoaderResourceFactory);
-		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put("data", objectLoaderResourceFactory);
-		
-		NcoreDrawioResourceFactory<EObject> ncoreDrawioResourceFactory = new NcoreDrawioResourceFactory<EObject>() {
-			
-			@Override
-			protected ResourceSet getResourceSet() {
-				return resourceSet;
-			}
-			
-			@Override
-			protected ProgressMonitor getProgressMonitor(URI uri) {
-				return progressMonitor;
-			}
-			
-			@Override
-			protected MarkerFactory getMarkerFactory() {
-				return markerFactory;
-			}
-			
-		};
-		
-		extensionToFactoryMap.put("drawio", ncoreDrawioResourceFactory);		
-		extensionToFactoryMap.put(org.eclipse.emf.ecore.resource.Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		
-		resourceSet.getPackageRegistry().put(NcorePackage.eNS_URI, NcorePackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(ExecPackage.eNS_URI, ExecPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(ContentPackage.eNS_URI, ContentPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(ResourcesPackage.eNS_URI, ResourcesPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(HtmlPackage.eNS_URI, HtmlPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(BootstrapPackage.eNS_URI, BootstrapPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(AppPackage.eNS_URI, AppPackage.eINSTANCE);
-		
-		resourceSet.getAdapterFactories().add(new AppAdapterFactory());
-		
-		return resourceSet;
-	}
-	
 	public void generate() throws Exception {
-		delete(MODELS_DIR);
-		delete(ACTION_MODELS_DIR);
-		delete(RESOURCE_MODELS_DIR);
+		org.nasdanika.common.Util.delete(MODELS_DIR);
+		org.nasdanika.common.Util.delete(ACTION_MODELS_DIR);
+		org.nasdanika.common.Util.	delete(RESOURCE_MODELS_DIR);
 		
 		MODELS_DIR.mkdirs();
 		ACTION_MODELS_DIR.mkdirs();
