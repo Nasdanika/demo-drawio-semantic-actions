@@ -78,7 +78,6 @@ import org.nasdanika.html.model.app.gen.ActionContentProvider;
 import org.nasdanika.html.model.app.gen.AppAdapterFactory;
 import org.nasdanika.html.model.app.gen.LinkJsTreeNodeSupplierFactoryAdapter;
 import org.nasdanika.html.model.app.gen.NavigationPanelConsumerFactoryAdapter;
-import org.nasdanika.html.model.app.gen.PageContentProvider;
 import org.nasdanika.html.model.app.gen.Util;
 import org.nasdanika.html.model.app.util.ActionProvider;
 import org.nasdanika.html.model.app.util.AppObjectLoaderSupplier;
@@ -315,33 +314,13 @@ public class DrawioSemanticMappingGenerator {
 		
 		File pagesDir = new File(RESOURCE_MODELS_DIR, "pages");
 		pagesDir.mkdirs();
-		PageContentProvider.Factory pageContentProviderFactory = (contentProviderContext) -> (page, baseURI, uriResolver, pMonitor) -> {
-			try {
-				// Saving a page to .xml and creating a reference to .html; Pages shall be processed from .xml to .html individually.
-				page.setUuid(UUID.randomUUID().toString());
-				
-				ResourceSet pageResourceSet = new ResourceSetImpl();
-				pageResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());			
-				URI pageURI = URI.createFileURI(new File(pagesDir, page.getUuid() + ".xml").getCanonicalPath());
-				Resource pageEResource = pageResourceSet.createResource(pageURI);
-				pageEResource.getContents().add(page);
-				pageEResource.save(null);
-				
-				org.nasdanika.exec.content.Resource pageResource = ContentFactory.eINSTANCE.createResource();
-				pageResource.setLocation("pages/" + page.getUuid() + ".html");
-				System.out.println("[Page content] " + page.getName() + " -> " + pageResource.getLocation());
-				return pageResource;
-			} catch (IOException e) {
-				throw new NasdanikaException(e);
-			}
-		};
 		
 		Util.generateSite(
 				root, 
 				pageTemplate,
 				container,
 				contentProviderContext -> (cAction, uriResolver, pMonitor) -> getActionContent(cAction, uriResolver, registry, contentProviderContext, diagnosticConsumer, pMonitor),
-				pageContentProviderFactory,
+				contentProviderContext -> (page, baseURI, uriResolver, pMonitor) -> getPageContent(page, baseURI, uriResolver, pagesDir, contentProviderContext, progressMonitor),
 				context,
 				progressMonitor);
 		
@@ -357,9 +336,47 @@ public class DrawioSemanticMappingGenerator {
 			SupplierFactory<InputStream> contentFactory = org.nasdanika.common.Util.asInputStreamSupplierFactory(pageEResource.getContents());			
 			try (InputStream contentStream = org.nasdanika.common.Util.call(contentFactory.create(context), progressMonitor, diagnosticConsumer, Status.FAIL, Status.ERROR)) {
 				Files.copy(contentStream, new File(pageFile.getCanonicalPath().replace(".xml", ".html")).toPath(), StandardCopyOption.REPLACE_EXISTING);
-				System.out.println("[Page xml -> html] " + pageFile.getName());
+				progressMonitor.worked(1, "[Page xml -> html] " + pageFile.getName());
 			}
 		}				
+	}
+	
+	/**
+	 * Creates a file with .xml extension containing page contents resource model. Creates and returns a resource with .html extension. 
+	 * A later processing step shall convert .xml to .html 
+	 * @param page
+	 * @param baseURI
+	 * @param uriResolver
+	 * @param pagesDir
+	 * @param progressMonitor
+	 * @return
+	 */
+	protected EList<EObject> getPageContent(
+			org.nasdanika.html.model.bootstrap.Page page, 
+			URI baseURI, 
+			BiFunction<Label, URI, URI> uriResolver,
+			File pagesDir,
+			Context contentProviderContext,
+			ProgressMonitor progressMonitor) {
+		
+		try {
+			// Saving a page to .xml and creating a reference to .html; Pages shall be processed from .xml to .html individually.
+			page.setUuid(UUID.randomUUID().toString());
+			
+			ResourceSet pageResourceSet = new ResourceSetImpl();
+			pageResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());			
+			URI pageURI = URI.createFileURI(new File(pagesDir, page.getUuid() + ".xml").getCanonicalPath());
+			Resource pageEResource = pageResourceSet.createResource(pageURI);
+			pageEResource.getContents().add(page);
+			pageEResource.save(null);
+			
+			org.nasdanika.exec.content.Resource pageResource = ContentFactory.eINSTANCE.createResource();
+			pageResource.setLocation("pages/" + page.getUuid() + ".html");
+			progressMonitor.worked(1, "[Page content] " + page.getName() + " -> " + pageResource.getLocation());
+			return ECollections.singletonEList(pageResource);
+		} catch (IOException e) {
+			throw new NasdanikaException(e);
+		}		
 	}
 
 	/**
@@ -654,7 +671,7 @@ public class DrawioSemanticMappingGenerator {
 		
 		org.nasdanika.exec.content.Resource contentResource = ContentFactory.eINSTANCE.createResource();
 		contentResource.setLocation("../content/" + fileName);
-		System.out.println("[Action content] " + action.getName() + " -> " + fileName);
+		progressMonitor.worked(1, "[Action content] " + action.getText() + " -> " + fileName);
 		return ECollections.singletonEList(contentResource);					
 	}
 	
