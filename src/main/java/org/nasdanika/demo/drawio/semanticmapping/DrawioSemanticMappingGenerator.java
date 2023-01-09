@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -378,6 +379,237 @@ public class DrawioSemanticMappingGenerator {
 			throw new NasdanikaException(e);
 		}		
 	}
+	
+	/**
+	 * Computes site map tree script - context property computer
+	 * @param context
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected String computeSiteMapTreeScript(
+			Context context, 
+			Action action, 
+			BiFunction<Label, URI, URI> uriResolver,
+			Map<EObject, Action> registry,
+			ProgressMonitor progressMonitor) {
+		// TODO - actions from action prototype, e.g. Ecore doc actions, to the tree.
+		
+		JsTreeFactory jsTreeFactory = context.get(JsTreeFactory.class, JsTreeFactory.INSTANCE);
+		Map<EObject, JsTreeNode> nodeMap = new HashMap<>();
+		for (Entry<EObject, Action> re: registry.entrySet()) {
+			Action treeAction = re.getValue();
+			
+			Link link = AppFactory.eINSTANCE.createLink();
+			String treeActionText = treeAction.getText();
+			int maxLength = 50;
+			link.setText(treeActionText.length() > maxLength ? treeActionText.substring(0, maxLength) + "..." : treeActionText);
+			link.setIcon(treeAction.getIcon());
+			
+			URI bURI = uriResolver.apply(action, (URI) null);
+			URI tURI = uriResolver.apply(treeAction, bURI);
+			if (tURI != null) {
+				link.setLocation(tURI.toString());
+			}
+			LinkJsTreeNodeSupplierFactoryAdapter<Link> adapter = new LinkJsTreeNodeSupplierFactoryAdapter<>(link);
+			
+			try {
+				JsTreeNode jsTreeNode = adapter.create(context).execute(progressMonitor);
+				jsTreeNode.attribute(Util.DATA_NSD_ACTION_UUID_ATTRIBUTE, treeAction.getUuid());
+				nodeMap.put(re.getKey(), jsTreeNode);
+			} catch (Exception e) {
+				throw new NasdanikaException(e);
+			}
+		}
+		
+		Map<EObject, JsTreeNode> roots = new HashMap<>(nodeMap);
+		
+		Map<EObject,Map<String,List<JsTreeNode>>> refMap = new HashMap<>();
+		for (EObject eObj: new ArrayList<>(nodeMap.keySet())) {
+			Map<String,List<JsTreeNode>> rMap = new TreeMap<>();					
+			for (EReference eRef: eObj.eClass().getEAllReferences()) {
+				if (eRef.isContainment()) {
+					Object eRefValue = eObj.eGet(eRef);
+					List<JsTreeNode> refNodes = new ArrayList<>();
+					for (Object ve: eRefValue instanceof Collection ? (Collection<Object>) eRefValue : Collections.singletonList(eRefValue)) {
+						JsTreeNode refNode = roots.remove(ve);
+						if (refNode != null) {
+							refNodes.add(refNode);
+						}
+					}
+					if (!refNodes.isEmpty()) {
+						rMap.put(org.nasdanika.common.Util.nameToLabel(eRef.getName()) , refNodes);
+					}
+				}
+			}
+			if (!rMap.isEmpty()) {
+				refMap.put(eObj, rMap);
+			}
+		}
+		
+		for (Entry<EObject, JsTreeNode> ne: nodeMap.entrySet()) {
+			Map<String, List<JsTreeNode>> refs = refMap.get(ne.getKey());
+			if (refs != null) {
+				for (Entry<String, List<JsTreeNode>> ref: refs.entrySet()) {
+					JsTreeNode refNode = jsTreeFactory.jsTreeNode();
+					refNode.text(ref.getKey());
+					refNode.children().addAll(ref.getValue());
+					ne.getValue().children().add(refNode);
+				}
+			}
+		}
+		
+		JSONObject jsTree = jsTreeFactory.buildJsTree(roots.values());
+
+		List<String> plugins = new ArrayList<>();
+		plugins.add("state");
+		plugins.add("search");
+		JSONObject searchConfig = new JSONObject();
+		searchConfig.put("show_only_matches", true);
+		jsTree.put("search", searchConfig);
+		jsTree.put("plugins", plugins); 		
+		jsTree.put("state", Collections.singletonMap("key", "nsd-site-map-tree"));
+		
+		// Deletes selection from state
+		String filter = NavigationPanelConsumerFactoryAdapter.CLEAR_STATE_FILTER + " tree.search.search_callback = (results, node) => results.split(' ').includes(node.original['data-nsd-action-uuid']);";
+		
+		return jsTreeFactory.bind("#nsd-site-map-tree", jsTree, filter, null).toString();					
+	}
+	
+	/**
+	 * Computes a table of contents for a Drawio element
+	 * @param element
+	 * @param context
+	 * @return
+	 */
+	protected Object computeTableOfContents(org.nasdanika.drawio.Element element, Context context) {
+		HTMLFactory htmlFactory = context.get(HTMLFactory.class, HTMLFactory.INSTANCE);
+		if (element instanceof org.nasdanika.drawio.Document) {
+			List<Page> pages = ((org.nasdanika.drawio.Document) element).getPages();
+			if (pages.size() == 1) {
+				return computeTableOfContents(pages.get(0), context);
+			}
+			Tag ol = htmlFactory.tag(TagName.ol);
+			for (Page page: pages) {
+				Tag li = htmlFactory.tag(TagName.li, page.getName(), computeTableOfContents(page, context));
+				ol.content(li);
+			}
+			return ol;
+		}
+		
+		if (element instanceof Page) {
+			List<Layer> layers = new ArrayList<>(((Page) element).getModel().getRoot().getLayers());
+			if (layers.size() == 1) {
+				return computeTableOfContents(layers.get(0), context);
+			}
+			Collections.reverse(layers);
+			Tag ol = htmlFactory.tag(TagName.ol);
+			for (Layer layer: layers) {
+				if (org.nasdanika.common.Util.isBlank(layer.getLabel())) {
+					ol.content(computeTableOfContents(layer, context));
+				} else {
+					Tag li = htmlFactory.tag(
+							TagName.li, 
+							org.nasdanika.common.Util.isBlank(layer.getLink()) || layer.getLinkedPage() != null ? layer.getLabel() : htmlFactory.tag(TagName.a, layer.getLabel()).attribute("href", layer.getLink()),
+							org.nasdanika.common.Util.isBlank(layer.getTooltip()) ? "" : " - " + Jsoup.parse(layer.getTooltip()).text() ,
+							computeTableOfContents(layer, context));
+					ol.content(li);								
+				}							
+			}
+			return ol;
+		}
+		
+		if (element instanceof Layer) { // Including nodes
+			List<LayerElement> layerElements = new ArrayList<>(((Layer) element).getElements());
+			Collections.sort(layerElements, new LabelModelElementComparator(false));
+			if (element instanceof org.nasdanika.drawio.Node) {
+				List<LayerElement> outgoingConnections = new ArrayList<>(((org.nasdanika.drawio.Node) element).getOutgoingConnections());
+				Collections.sort(outgoingConnections, new LabelModelElementComparator(false));
+				layerElements.addAll(outgoingConnections);
+			}
+			
+			Tag ol = htmlFactory.tag(TagName.ol);
+			for (LayerElement layerElement: layerElements) {
+				if (layerElement instanceof org.nasdanika.drawio.Node || (layerElement instanceof Connection && (((Connection) layerElement).getSource() == null || ((Connection) layerElement).getSource() == element))) {
+					if (org.nasdanika.common.Util.isBlank(layerElement.getLabel())) { 
+						ol.content(computeTableOfContents(layerElement, context));
+					} else {
+						Tag li = htmlFactory.tag(
+								TagName.li,
+								org.nasdanika.common.Util.isBlank(layerElement.getLink()) || layerElement.getLinkedPage() != null ? Jsoup.parse(layerElement.getLabel()).text() : htmlFactory.tag(TagName.a, Jsoup.parse(layerElement.getLabel()).text()).attribute("href", layerElement.getLink()),										
+								org.nasdanika.common.Util.isBlank(layerElement.getTooltip()) ? "" : " - " + Jsoup.parse(layerElement.getTooltip()).text() ,
+										computeTableOfContents(layerElement, context));
+						ol.content(li);								
+					}
+				}
+			}
+			return ol;						
+		}
+		
+		return null; 		
+	}
+	
+	protected String computeSemanticLink(
+			Context context, 
+			String key, 
+			String path, 
+			Action action,
+			URI baseSemanticURI,
+			BiFunction<Label, URI, URI> uriResolver,
+			Map<EObject, Action> registry) {
+		int spaceIdx = path.indexOf(' ');
+		URI targetURI = URI.createURI(spaceIdx == -1 ? path : path.substring(0, spaceIdx));
+		if (baseSemanticURI != null && targetURI.isRelative()) {
+			targetURI = targetURI.resolve(baseSemanticURI.appendSegment(""));
+		}	
+		URI bURI = uriResolver.apply(action, (URI) null);						
+		for (Entry<EObject, Action> registryEntry: registry.entrySet()) {
+			for (URI semanticURI: NcoreUtil.getUris(registryEntry.getKey())) {
+				if (Objects.equals(targetURI, semanticURI)) {
+					Action targetAction = registryEntry.getValue();
+					HTMLFactory htmlFactory = context.get(HTMLFactory.class, HTMLFactory.INSTANCE);
+					URI targetActionURI = uriResolver.apply(targetAction, bURI);
+					Tag tag = htmlFactory.tag(targetActionURI == null ? TagName.span : TagName.a, spaceIdx == -1 ? targetAction.getText() : path.substring(spaceIdx + 1));
+					String targetActionTooltip = targetAction.getTooltip();
+					if (!org.nasdanika.common.Util.isBlank(targetActionTooltip)) {
+						tag.attribute("title", targetActionTooltip);
+					}
+					if (targetActionURI != null) {
+						tag.attribute("href", targetActionURI.toString());
+					}
+					return tag.toString(); 
+				}
+			}
+		}
+		return null;
+	}
+	
+	protected String computeSemanticReferfence(
+			Context context, 
+			String key, 
+			String path,
+			Action action,
+			URI baseSemanticURI,
+			BiFunction<Label, URI, URI> uriResolver,
+			Map<EObject, Action> registry) {
+
+		URI targetURI = URI.createURI(path);
+		if (baseSemanticURI != null && targetURI.isRelative()) {
+			targetURI = targetURI.resolve(baseSemanticURI.appendSegment(""));
+		}	
+		URI bURI = uriResolver.apply(action, (URI) null);						
+		for (Entry<EObject, Action> registryEntry: registry.entrySet()) {
+			for (URI semanticURI: NcoreUtil.getUris(registryEntry.getKey())) {
+				if (Objects.equals(targetURI, semanticURI)) {
+					Action targetAction = registryEntry.getValue();
+					URI targetActionURI = uriResolver.apply(targetAction, bURI);
+					if (targetActionURI != null) {
+						return targetActionURI.toString();
+					}
+				}
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * {@link ActionContentProvider} method
@@ -390,176 +622,18 @@ public class DrawioSemanticMappingGenerator {
 			Action action, 
 			BiFunction<Label, URI, URI> uriResolver,
 			Map<EObject, Action> registry,
-			Context contentProviderContext,
+			Context context,
 			java.util.function.Consumer<Diagnostic> diagnosticConsumer,
 			ProgressMonitor progressMonitor) {
 		
-		@SuppressWarnings("unchecked")
-		java.util.function.Function<Context, String> siteMapTreeScriptComputer = ctx -> {
-			// TODO - actions from action prototype, e.g. Ecore doc actions, to the tree.
-			
-			JsTreeFactory jsTreeFactory = contentProviderContext.get(JsTreeFactory.class, JsTreeFactory.INSTANCE);
-			Map<EObject, JsTreeNode> nodeMap = new HashMap<>();
-			for (Entry<EObject, Action> re: registry.entrySet()) {
-				Action treeAction = re.getValue();
-				
-				Link link = AppFactory.eINSTANCE.createLink();
-				String treeActionText = treeAction.getText();
-				int maxLength = 50;
-				link.setText(treeActionText.length() > maxLength ? treeActionText.substring(0, maxLength) + "..." : treeActionText);
-				link.setIcon(treeAction.getIcon());
-				
-				URI bURI = uriResolver.apply(action, (URI) null);
-				URI tURI = uriResolver.apply(treeAction, bURI);
-				if (tURI != null) {
-					link.setLocation(tURI.toString());
-				}
-				LinkJsTreeNodeSupplierFactoryAdapter<Link> adapter = new LinkJsTreeNodeSupplierFactoryAdapter<>(link);
-				
-				try {
-					JsTreeNode jsTreeNode = adapter.create(ctx).execute(progressMonitor);
-					jsTreeNode.attribute(Util.DATA_NSD_ACTION_UUID_ATTRIBUTE, treeAction.getUuid());
-					nodeMap.put(re.getKey(), jsTreeNode);
-				} catch (Exception e) {
-					throw new NasdanikaException(e);
-				}
-			}
-			
-			Map<EObject, JsTreeNode> roots = new HashMap<>(nodeMap);
-			
-			Map<EObject,Map<String,List<JsTreeNode>>> refMap = new HashMap<>();
-			for (EObject eObj: new ArrayList<>(nodeMap.keySet())) {
-				Map<String,List<JsTreeNode>> rMap = new TreeMap<>();					
-				for (EReference eRef: eObj.eClass().getEAllReferences()) {
-					if (eRef.isContainment()) {
-						Object eRefValue = eObj.eGet(eRef);
-						List<JsTreeNode> refNodes = new ArrayList<>();
-						for (Object ve: eRefValue instanceof Collection ? (Collection<Object>) eRefValue : Collections.singletonList(eRefValue)) {
-							JsTreeNode refNode = roots.remove(ve);
-							if (refNode != null) {
-								refNodes.add(refNode);
-							}
-						}
-						if (!refNodes.isEmpty()) {
-							rMap.put(org.nasdanika.common.Util.nameToLabel(eRef.getName()) , refNodes);
-						}
-					}
-				}
-				if (!rMap.isEmpty()) {
-					refMap.put(eObj, rMap);
-				}
-			}
-			
-			for (Entry<EObject, JsTreeNode> ne: nodeMap.entrySet()) {
-				Map<String, List<JsTreeNode>> refs = refMap.get(ne.getKey());
-				if (refs != null) {
-					for (Entry<String, List<JsTreeNode>> ref: refs.entrySet()) {
-						JsTreeNode refNode = jsTreeFactory.jsTreeNode();
-						refNode.text(ref.getKey());
-						refNode.children().addAll(ref.getValue());
-						ne.getValue().children().add(refNode);
-					}
-				}
-			}
-			
-			JSONObject jsTree = jsTreeFactory.buildJsTree(roots.values());
-	
-			List<String> plugins = new ArrayList<>();
-			plugins.add("state");
-			plugins.add("search");
-			JSONObject searchConfig = new JSONObject();
-			searchConfig.put("show_only_matches", true);
-			jsTree.put("search", searchConfig);
-			jsTree.put("plugins", plugins); 		
-			jsTree.put("state", Collections.singletonMap("key", "nsd-site-map-tree"));
-			
-			// Deletes selection from state
-			String filter = NavigationPanelConsumerFactoryAdapter.CLEAR_STATE_FILTER + " tree.search.search_callback = (results, node) => results.split(' ').includes(node.original['data-nsd-action-uuid']);";
-			
-			return jsTreeFactory.bind("#nsd-site-map-tree", jsTree, filter, null).toString();			
-		};		
-		
-		MutableContext mctx = contentProviderContext.fork();
-		mctx.put("nsd-site-map-tree-script", siteMapTreeScriptComputer);
-								
-		java.util.function.Function<org.nasdanika.drawio.Element,Object> tableOfContents = new java.util.function.Function<org.nasdanika.drawio.Element,Object>() {
-
-			HTMLFactory htmlFactory = contentProviderContext.get(HTMLFactory.class, HTMLFactory.INSTANCE);
-
-			@Override
-			public Object apply(org.nasdanika.drawio.Element element) {
-				if (element instanceof org.nasdanika.drawio.Document) {
-					List<Page> pages = ((org.nasdanika.drawio.Document) element).getPages();
-					if (pages.size() == 1) {
-						return apply(pages.get(0));
-					}
-					Tag ol = htmlFactory.tag(TagName.ol);
-					for (Page page: pages) {
-						Tag li = htmlFactory.tag(TagName.li, page.getName(), apply(page));
-						ol.content(li);
-					}
-					return ol;
-				}
-				
-				if (element instanceof Page) {
-					List<Layer> layers = new ArrayList<>(((Page) element).getModel().getRoot().getLayers());
-					if (layers.size() == 1) {
-						return apply(layers.get(0));
-					}
-					Collections.reverse(layers);
-					Tag ol = htmlFactory.tag(TagName.ol);
-					for (Layer layer: layers) {
-						if (org.nasdanika.common.Util.isBlank(layer.getLabel())) {
-							ol.content(apply(layer));
-						} else {
-							Tag li = htmlFactory.tag(
-									TagName.li, 
-									org.nasdanika.common.Util.isBlank(layer.getLink()) || layer.getLinkedPage() != null ? layer.getLabel() : htmlFactory.tag(TagName.a, layer.getLabel()).attribute("href", layer.getLink()),
-									org.nasdanika.common.Util.isBlank(layer.getTooltip()) ? "" : " - " + Jsoup.parse(layer.getTooltip()).text() ,
-									apply(layer));
-							ol.content(li);								
-						}							
-					}
-					return ol;
-				}
-				
-				if (element instanceof Layer) { // Including nodes
-					List<LayerElement> layerElements = new ArrayList<>(((Layer) element).getElements());
-					Collections.sort(layerElements, new LabelModelElementComparator(false));
-					if (element instanceof org.nasdanika.drawio.Node) {
-						List<LayerElement> outgoingConnections = new ArrayList<>(((org.nasdanika.drawio.Node) element).getOutgoingConnections());
-						Collections.sort(outgoingConnections, new LabelModelElementComparator(false));
-						layerElements.addAll(outgoingConnections);
-					}
-					
-					Tag ol = htmlFactory.tag(TagName.ol);
-					for (LayerElement layerElement: layerElements) {
-						if (layerElement instanceof org.nasdanika.drawio.Node || (layerElement instanceof Connection && (((Connection) layerElement).getSource() == null || ((Connection) layerElement).getSource() == element))) {
-							if (org.nasdanika.common.Util.isBlank(layerElement.getLabel())) { 
-								ol.content(apply(layerElement));
-							} else {
-								Tag li = htmlFactory.tag(
-										TagName.li,
-										org.nasdanika.common.Util.isBlank(layerElement.getLink()) || layerElement.getLinkedPage() != null ? Jsoup.parse(layerElement.getLabel()).text() : htmlFactory.tag(TagName.a, Jsoup.parse(layerElement.getLabel()).text()).attribute("href", layerElement.getLink()),										
-										org.nasdanika.common.Util.isBlank(layerElement.getTooltip()) ? "" : " - " + Jsoup.parse(layerElement.getTooltip()).text() ,
-										apply(layerElement));
-								ol.content(li);								
-							}
-						}
-					}
-					return ol;						
-				}
-				
-				return null; 
-			}
-			
-		};
+		MutableContext mctx = context.fork();
+		mctx.put("nsd-site-map-tree-script", (Function<Context, String>) ctx -> computeSiteMapTreeScript(ctx, action, uriResolver, registry, progressMonitor));
 		
 		Map<String, org.nasdanika.drawio.Document> representations = NcoreActionBuilder.resolveRepresentationLinks(action, uriResolver, progressMonitor);
 		for (Entry<String, org.nasdanika.drawio.Document> representationEntry: representations.entrySet()) {
 			try {
 				mctx.put("representations/" + representationEntry.getKey() + "/diagram", representationEntry.getValue().save(true));
-				Object toc = tableOfContents.apply(representationEntry.getValue());
+				Object toc = computeTableOfContents(representationEntry.getValue(), context);
 				if (toc != null) {
 					mctx.put("representations/" + representationEntry.getKey() + "/toc", toc.toString());
 				}
@@ -581,36 +655,13 @@ public class DrawioSemanticMappingGenerator {
 			
 			@SuppressWarnings("unchecked")
 			@Override
-			public <T> T compute(Context propertyComputerContext, String key, String path, Class<T> type) {
+			public <T> T compute(Context ctx, String key, String path, Class<T> type) {
 				if (type == null || type.isAssignableFrom(String.class)) {
-					int spaceIdx = path.indexOf(' ');
-					URI targetURI = URI.createURI(spaceIdx == -1 ? path : path.substring(0, spaceIdx));
-					if (baseSemanticURI.isPresent() && targetURI.isRelative()) {
-						targetURI = targetURI.resolve(baseSemanticURI.get().appendSegment(""));
-					}	
-					URI bURI = uriResolver.apply(action, (URI) null);						
-					for (Entry<EObject, Action> registryEntry: registry.entrySet()) {
-						for (URI semanticURI: NcoreUtil.getUris(registryEntry.getKey())) {
-							if (Objects.equals(targetURI, semanticURI)) {
-								Action targetAction = registryEntry.getValue();
-								HTMLFactory htmlFactory = propertyComputerContext.get(HTMLFactory.class, HTMLFactory.INSTANCE);
-								URI targetActionURI = uriResolver.apply(targetAction, bURI);
-								Tag tag = htmlFactory.tag(targetActionURI == null ? TagName.span : TagName.a, spaceIdx == -1 ? targetAction.getText() : path.substring(spaceIdx + 1));
-								String targetActionTooltip = targetAction.getTooltip();
-								if (!org.nasdanika.common.Util.isBlank(targetActionTooltip)) {
-									tag.attribute("title", targetActionTooltip);
-								}
-								if (targetActionURI != null) {
-									tag.attribute("href", targetActionURI.toString());
-								}
-								return (T) tag.toString(); 
-							}
-						}
-					}
+					return (T) computeSemanticLink(ctx, key, path, action, baseSemanticURI.orElse(null), uriResolver, registry);			
 				}
 				return null;
 			}
-		};
+		}; 
 		
 		mctx.put("semantic-link", semanticLinkPropertyComputer);
 					
@@ -620,22 +671,7 @@ public class DrawioSemanticMappingGenerator {
 			@Override
 			public <T> T compute(Context propertyComputerContext, String key, String path, Class<T> type) {
 				if (type == null || type.isAssignableFrom(String.class)) {
-					URI targetURI = URI.createURI(path);
-					if (baseSemanticURI.isPresent() && targetURI.isRelative()) {
-						targetURI = targetURI.resolve(baseSemanticURI.get().appendSegment(""));
-					}	
-					URI bURI = uriResolver.apply(action, (URI) null);						
-					for (Entry<EObject, Action> registryEntry: registry.entrySet()) {
-						for (URI semanticURI: NcoreUtil.getUris(registryEntry.getKey())) {
-							if (Objects.equals(targetURI, semanticURI)) {
-								Action targetAction = registryEntry.getValue();
-								URI targetActionURI = uriResolver.apply(targetAction, bURI);
-								if (targetActionURI != null) {
-									return (T) targetActionURI.toString();
-								}
-							}
-						}
-					}
+					return (T) computeSemanticReferfence(propertyComputerContext, key, path, action, baseSemanticURI.orElse(null), uriResolver, registry);
 				}
 				return null;
 			}
@@ -673,8 +709,7 @@ public class DrawioSemanticMappingGenerator {
 		contentResource.setLocation("../content/" + fileName);
 		progressMonitor.worked(1, "[Action content] " + action.getText() + " -> " + fileName);
 		return ECollections.singletonEList(contentResource);					
-	}
-	
+	}	
 	
 	/**
 	 * Generates files from the previously generated resource model.
