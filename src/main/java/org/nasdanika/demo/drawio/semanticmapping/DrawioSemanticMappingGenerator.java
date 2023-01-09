@@ -610,7 +610,7 @@ public class DrawioSemanticMappingGenerator {
 		}
 		return null;
 	}
-
+		
 	/**
 	 * {@link ActionContentProvider} method
 	 * @param action
@@ -625,15 +625,67 @@ public class DrawioSemanticMappingGenerator {
 			Context context,
 			java.util.function.Consumer<Diagnostic> diagnosticConsumer,
 			ProgressMonitor progressMonitor) {
+
+		List<Object> contentContributions = new ArrayList<>();
+		
+		Context actionContentContext = createActionContentContext(action, uriResolver, registry, (ContentConsumer) contentContributions::add, context, progressMonitor);
+		
+		File contentDir = new File(RESOURCE_MODELS_DIR, "content");
+		contentDir.mkdirs();
+		
+		String fileName = action.getUuid() + ".html";
+		SupplierFactory<InputStream> contentFactory = org.nasdanika.common.Util.asInputStreamSupplierFactory(action.getContent());			
+		try (InputStream contentStream = org.nasdanika.common.Util.call(contentFactory.create(actionContentContext), progressMonitor, diagnosticConsumer, Status.FAIL, Status.ERROR)) {
+			if (contentContributions.isEmpty()) {
+				Files.copy(contentStream, new File(contentDir, fileName).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} else {
+				Stream<InputStream> pageBodyContributionsStream = contentContributions.stream().filter(Objects::nonNull).map(e -> {
+					try {
+						return DefaultConverter.INSTANCE.toInputStream(e.toString());
+					} catch (IOException ex) {
+						throw new NasdanikaException("Error converting element to InputStream: " + ex, ex);
+					}
+				});
+				Stream<InputStream> concatenatedStream = Stream.concat(pageBodyContributionsStream, Stream.of(contentStream));
+				Files.copy(org.nasdanika.common.Util.join(concatenatedStream), new File(contentDir, fileName).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			}
+		} catch (Exception e) {
+			throw new NasdanikaException(e);
+		}
+		
+		org.nasdanika.exec.content.Resource contentResource = ContentFactory.eINSTANCE.createResource();
+		contentResource.setLocation("../content/" + fileName);
+		progressMonitor.worked(1, "[Action content] " + action.getText() + " -> " + fileName);
+		return ECollections.singletonEList(contentResource);					
+	}
+
+	/**
+	 * Registers semantic-link and semantic-ref property computers
+	 * @param action
+	 * @param uriResolver
+	 * @param registry
+	 * @param mctx
+	 */
+	protected Context createActionContentContext(
+			Action action, 
+			BiFunction<Label, URI, URI> uriResolver,
+			Map<EObject, Action> registry,
+			ContentConsumer contentConsumer,
+			Context context,
+			ProgressMonitor progressMonitor) {
 		
 		MutableContext mctx = context.fork();
 		mctx.put("nsd-site-map-tree-script", (Function<Context, String>) ctx -> computeSiteMapTreeScript(ctx, action, uriResolver, registry, progressMonitor));
+		
+		if (contentConsumer != null) {
+			mctx.register(ContentConsumer.class, contentConsumer);
+		}
 		
 		Map<String, org.nasdanika.drawio.Document> representations = NcoreActionBuilder.resolveRepresentationLinks(action, uriResolver, progressMonitor);
 		for (Entry<String, org.nasdanika.drawio.Document> representationEntry: representations.entrySet()) {
 			try {
 				mctx.put("representations/" + representationEntry.getKey() + "/diagram", representationEntry.getValue().save(true));
-				Object toc = computeTableOfContents(representationEntry.getValue(), context);
+				Object toc = computeTableOfContents(representationEntry.getValue(), mctx);
 				if (toc != null) {
 					mctx.put("representations/" + representationEntry.getKey() + "/toc", toc.toString());
 				}
@@ -677,38 +729,9 @@ public class DrawioSemanticMappingGenerator {
 			}
 		};
 		
-		mctx.put("semantic-ref", semanticReferencePropertyComputer);			
+		mctx.put("semantic-ref", semanticReferencePropertyComputer);
 		
-		List<Object> contentContributions = new ArrayList<>();
-		mctx.register(ContentConsumer.class, (ContentConsumer) contentContributions::add);			
-		
-		File contentDir = new File(RESOURCE_MODELS_DIR, "content");
-		contentDir.mkdirs();
-		
-		String fileName = action.getUuid() + ".html";
-		SupplierFactory<InputStream> contentFactory = org.nasdanika.common.Util.asInputStreamSupplierFactory(action.getContent());			
-		try (InputStream contentStream = org.nasdanika.common.Util.call(contentFactory.create(mctx), progressMonitor, diagnosticConsumer, Status.FAIL, Status.ERROR)) {
-			if (contentContributions.isEmpty()) {
-				Files.copy(contentStream, new File(contentDir, fileName).toPath(), StandardCopyOption.REPLACE_EXISTING);
-			} else {
-				Stream<InputStream> pageBodyContributionsStream = contentContributions.stream().filter(Objects::nonNull).map(e -> {
-					try {
-						return DefaultConverter.INSTANCE.toInputStream(e.toString());
-					} catch (IOException ex) {
-						throw new NasdanikaException("Error converting element to InputStream: " + ex, ex);
-					}
-				});
-				Stream<InputStream> concatenatedStream = Stream.concat(pageBodyContributionsStream, Stream.of(contentStream));
-				Files.copy(org.nasdanika.common.Util.join(concatenatedStream), new File(contentDir, fileName).toPath(), StandardCopyOption.REPLACE_EXISTING);
-			}
-		} catch (Exception e) {
-			throw new NasdanikaException(e);
-		}
-		
-		org.nasdanika.exec.content.Resource contentResource = ContentFactory.eINSTANCE.createResource();
-		contentResource.setLocation("../content/" + fileName);
-		progressMonitor.worked(1, "[Action content] " + action.getText() + " -> " + fileName);
-		return ECollections.singletonEList(contentResource);					
+		return mctx;
 	}	
 	
 	/**
