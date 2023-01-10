@@ -7,7 +7,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.junit.jupiter.api.Test;
 import org.nasdanika.common.ExecutionException;
-import org.nasdanika.html.model.app.gen.SiteGenerator;
+import org.nasdanika.html.model.app.gen.SemanticSiteGenerator;
 
 public class TestDrawioSemanticMappingGenerator {
 	
@@ -25,7 +25,7 @@ public class TestDrawioSemanticMappingGenerator {
 		
 		String siteMapDomain = "https://docs.nasdanika.org/demo-drawio-semantic-mapping";		
 		
-		SiteGenerator siteGenerator = new SiteGenerator();
+		SemanticSiteGenerator siteGenerator = new SemanticSiteGenerator();
 		
 		Map<String, Collection<String>> errors = siteGenerator.generate(
 				semanticModelURI,
