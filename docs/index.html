@@ -72,25 +72,24 @@ window.nsdJsTreeSearchCallback = function(str, node) {
     <div class="container-fluid nsd-app-container">
       <div class="row">
         <div class="col nsd-app-header">
-          <a href="https://www.nasdanika.org" title="Root action" data-nsd-action-uuid="51f7a4b1-e33c-4feb-a375-ead09520f81c" class="nsd-app-header-title">
+          <a href="https://www.nasdanika.org" title="Root action" data-nsd-action-uuid="8b23dd8f-58f0-4a6b-b325-6bc51500eadd" class="nsd-app-header-title">
             <img src="https://docs.nasdanika.org/images/nasdanika-logo.png" class="nsd-app-label-icon">Nasdanika</a>
           <ul class="nav nsd-app-header-navs">
             <li class="nav-item">
-              <a href="search.html" data-nsd-action-uuid="b48a9789-da6e-4de1-8325-fecbda307037" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
+              <a href="search.html" data-nsd-action-uuid="c89ba095-4a38-4a33-8d6f-f27aa737ec1b" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="row">
         <div class="col nsd-app-navbar">
-          <ul class="navbar navbar-light navbar-expand-lg">
-            <a href="${base-uri}index.html" data-nsd-action-uuid="2d9e0844-7394-474b-b579-1feb537579a8" class="navbar-brand">Semantic Mapping Demo</a>
-            <button type="button" data-toggle="collapse" data-target="#nsd_u" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+          <ul class="navbar navbar-light navbar-expand-lg"><span data-nsd-action-uuid="41cee905-a992-4bff-a181-a31dbb40bd16" class="navbar-brand">Semantic Mapping Demo</span>
+            <button type="button" data-toggle="collapse" data-target="#nsd_46" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
             </button>
-            <div id="nsd_u" class="collapse navbar-collapse">
+            <div id="nsd_46" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a href="info.html" data-nsd-action-uuid="3ffb1ded-9dba-4ff0-89aa-e05d73b75f48" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
+                  <a href="info.html" data-nsd-action-uuid="4c5abb5e-8dc4-47e0-83f5-26e526543dca" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
                 </li>
               </ul>
             </div>
@@ -102,13 +101,13 @@ window.nsdJsTreeSearchCallback = function(str, node) {
           <input type="text" id="8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput" title="Full-text search. You can use wildcards, e.g. 'foo*' or 'f*o'; title or content fields, e.g. 'title:foo* bar'; boosts, e.g. 'foo^10 bar'; fuzzy matches, e.g. 'foo~1'; and term presence, e.g. '+foo bar -baz'" class="form-control mt-1">
           <div id="8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"></div>
           <script>$(document).ready( function() {
-$('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='children/infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/children/aws/index.html';"},"id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","data-nsd-action-uuid":"c49f1316-2b92-4660-b3ba-aa7e437caaf7","type":"leaf"}],"id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public","data-nsd-action-uuid":"1380e38b-b5fe-4767-969c-880975c561c0"}],"id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud","data-nsd-action-uuid":"fb4427db-6d8b-4ccf-987b-cf71bb51813f"}],"id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure","data-nsd-action-uuid":"156b95e4-2348-4282-a4c1-915e9eae47f4"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='children/business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='children/business-capabilties/children/business-capability-one/index.html';"},"id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","data-nsd-action-uuid":"4b6a6050-2d27-471a-b54b-8ac905de4a09","type":"leaf"}],"id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities","data-nsd-action-uuid":"ae6f1f02-0b94-4ea7-a8eb-33701997910e"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","data-nsd-action-uuid":"d0bc7eab-7cb3-4299-bb5f-a53a0089a1d5","type":"leaf"}],"id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings","data-nsd-action-uuid":"d45749aa-3620-47f3-821b-7c57819f683e"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
+$('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='children/infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/children/aws/index.html';"},"id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","data-nsd-action-uuid":"68deab3e-aa1f-416e-b0c7-356bec715bf5","type":"leaf"}],"id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public","data-nsd-action-uuid":"828fc1af-e085-4aa9-be55-707080480d27"}],"id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud","data-nsd-action-uuid":"ec9b8fb6-41eb-4f35-b2df-1ed79c61aba2"}],"id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure","data-nsd-action-uuid":"7eeaa0fa-e799-4d3d-9ce3-33fa2f297335"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='children/business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='children/business-capabilties/children/business-capability-one/index.html';"},"id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","data-nsd-action-uuid":"eaa90480-8438-40ff-a2c7-b99f370a30e2","type":"leaf"}],"id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities","data-nsd-action-uuid":"a7e775d3-6f15-406f-9520-3fc93ca9da68"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","data-nsd-action-uuid":"44d02986-25fa-48a4-9e11-f5c93b53c0b6","type":"leaf"}],"id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings","data-nsd-action-uuid":"fa5c4437-e018-4022-af6b-d17826e790d6"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
 // Tokens: searchInputSelector, timer, treeSelector
 $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').keyup(function () {
-    if (window['nsd_jstTreeSearchTimer_nsd_13']) { 
-		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_13']); 
+    if (window['nsd_jstTreeSearchTimer_nsd_4f']) { 
+		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_4f']); 
 	}
-    window['nsd_jstTreeSearchTimer_nsd_13'] = setTimeout(function () {
+    window['nsd_jstTreeSearchTimer_nsd_4f'] = setTimeout(function () {
       var v = $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').val();
       $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(true).search(v);
     }, 250);
@@ -116,14 +115,14 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
 
 });</script>
         </div>
-        <div data-nsd-action-uuid="2d9e0844-7394-474b-b579-1feb537579a8" class="col nsd-app-content-panel">
+        <div data-nsd-action-uuid="41cee905-a992-4bff-a181-a31dbb40bd16" class="col nsd-app-content-panel">
           <div class="container-fluid">
             <div class="row nsd-app-content-panel-content-row">
               <div class="col">
                 <div class="container-fluid">
                   <div class="row">
                     <div class="col"><div class="markdown-body"><p>Doc</p>
-<p></p><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;<mxfile agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/20.6.2 Chrome/106.0.5249.199 Electron/21.3.3 Safari/537.36\&quot; etag=\&quot;osHGeEsAQtQwx1a6leBx\&quot; host=\&quot;Electron\&quot; modified=\&quot;2022-12-22T12:30:28.899Z\&quot; pages=\&quot;1\&quot; type=\&quot;device\&quot; version=\&quot;20.6.2\&quot;><diagram id=\&quot;wNleSp8rjk_RZLYBW_x9\&quot; name=\&quot;Page-1\&quot;>5VtZc+M2Ev41eoQL4AXwcWyPk+zubKbKSWV3X7ZwNC1keA0P2zO/fhsgJVESJcu2EruyVbJNgUCjzw9fU/IivCoef2hkvfxUGcgXAZVNUz20i/B6EQQMf3BIV2UJutsaM4/j2zCOxpFvw0iQsHFOVuVma9FdY/cHbu13GAfpONpbA9sqFLJbDgPjnFrewdYMN/Aj2LvlSk9GJ1Nvtcz35/9mzUqsiMfZ7VKa6mFrr66q8s7WU43Cj4vwqqmqbriq1O/OQeg93dmqJH2/MjQwKVARRYSHaUQiHimiYp4SloGKQ46XUgy7rFaMm+ZSYTz8yDDQQN1AC2Un3RbDHQOZ7PNu1BwKWXZWT3bnmchommgS8iwgUaQCIgOt8ZfQ2mBkY5aNi2vQw5pSVw0QXRV11doOnfZhESSLIMTohJcLpx4tZTGM09txT7z8JOvalnd4dQ1Ftbemb2w7rNm7NbyIF9waWdov0s+8wZdBWa3728gHi1Jv1lYWq/0OSiukzbsKRbVVAVUJi4i6q4clNHCBBu4tNZXui42HjyiLJdHhRFSi+YLpUs55afpqu2/56LKu6eH43Kpv9Kzf918rPTAzNqsOKb3/yis9sbUBaQq4KMzJ6y3u3tRVLrvjxo0FUzxeQZ67wPq3eDEWztZdugMStWzQxGlx3BxYcCOI/bf+/fuP/2mqv326TX79139DEu1LGQWPQXEj0uW/u5vZR0Bpl8uucNXH8LKu0Exf/PHlIr7GEZnbO1eBGpz9OGALD0eXGYZjxDMWbMavbYF5epNbhb/l974BZwSCHCZy9w0vf22haS/a+zvvM6fbvcz7Ubervu0wbZvxBjQdPO5CEYI44Jyu+eZAaESqu/WQW7icgCMfQeZhA4DJ6KdRdJiGw/sR1QmjYsv5eDH6/wkENFHMo1RKEiZYlhHPQiICpgjXMRcszRIRwnjOLG1uMJUzrM9Sj9b7QXy/DZKzkY73kPPnDGUhSLTjHVt+2ZV6c0jUjS0NPF74RDiEr1oLAXEQk0wjsEeCcqKkYoTLJAOZ4kmoxQvw9f8ch6pN1G7+CEyanOlDSD43lek11jimb2l8qJt7q6FdKQPGL3GGjsXYXmyJXF9OMo72LTgB3dLV7tSqcRfVt7aE1g1oWUtlc9tZv6ls/W3M0eFEVeigL27LHSB9AtXaB1vksvTIZPP8qsqrxt8JjQSRYUJetl1TfYHJnUQLUNkGh84BN2sqNsGbMKFbgBNEwTbgpMkxvNk5O47AD1Wag3R4o/AwCNKUKBVnRMahpFSkkpn4PPCT7MHPmFc4yF4CQE/NSU4DKYijQANCk4wAKShITRSTgmTMRBGkRkaYCSeAFF3wywW/nqmfD76EfaYWSEctQTthM+lAqdxUriw6aLshyZdIu9HFzl229XQEbcPSO7D8H8MeMut8eQ1bXu2MHFh7i5nqdW6gcNvVbV/4nG0OrfjQDcXgMAAcI6UwpBsCgiz69YB1+OCq3Ti2Sg0SBdu21pNYislgh7lfe+vLGoEAa96bWzfS03vrVbmv8r7GA6CfslTs0KDE+W7j7qtDNQTepsGJ1sscNnG1DGuFvvYeTIoqd4721/Cooe6QkLuQI1w6dbWW4DDYQ1xtUSuHn8jIEZSdbtW9pyvew2t90C7ErEGRtveCbOkl5LVcW4nAZ7V177Grg2aYh/o4tJMeDFHMEDrrYBH1HMqoarwrvBneKv826+/kgSB9dDOXcpj31XWRhc+jcaHUqG273sHLhccanLE+Vi4THX6gePpPWfgcUkPMO8BSaMYM015eiyHyC8tKTcUiOcTM9ZZjYIZDoxicVFosaWdn4Xcdgua8YUufFt5+HHJ/CvlofZbWudQgu8ECaPxQ5XLKLXHqVEXp9x9zZjhAWscgjFypNZ3nfekdUyOe4qzeHS3T0/oXb61VXinZdzA6FAeMXMcEb6zDOwgGhTFt17dWni8Bz9LWpdQospW4tRNzj/nsZfXriKwyHwYMqHtjsUokbJIVuklCb5K0AVeLbuqB9Pipk0MYYEyRlX5L38AigQGsCqe9V7G2jt57s3I8XFbe7ruJfWi5i/XE+ysTsfkcyxC7BR8T5EgtYDmOe3gJNTT+uDGbwKy8jmDcrEQMkZLdEwzgGCue0IKm6hFZzdjePCwR4G9r6U+8h0bW293PmxKHaJ83sHiHN2z3KdEzSMNp/SPf7x/flZ83jeLtwFoXa7rxZ8WApdHpQThM1SQkGctoQKhKPVFByoK2kjDklKUpTxk9U6co9qja5YaLX21x8YO0bcXeycjdh+mnELIY28IsyAISZjQhUYjNsMhMREI8gylomgCsHkY+p2t04h0Tm1fsL9pi7ho7Ru1o37jHXy8PN2L+uN3rxNxZXG01dReLmedcL2/PYhAmmqt+EagwSd5Beyaeg7SHaz5SiUxoTElgAk4iziRRcYQFIXVKYwORpOl5aj49qea/LY43aweq/sgMlEncw+dj0IBU3G90KJvnZLJD4xerZ+UH4IelTABjnKiIIczqJCNKck0gAaqMyGKVxS/gGWIvv191/v2pFfAeeMbq06936+gN0ThUOME7ph0nBmHmM4fnAHeWZYGepW0mUUk8681fQC9Lq2U+yz3eDuF5cAZ/BicmNdv38muy+mxxmJwH7xFpToxC+BeIwnsGl8P8hsWJSmOISBBGgkSBCIiMNCMpiyEFCRHPovPwGxbtEZyfyqyR6Pted30DR1iN3Zl4ShdDU2xcOKMkTIUkkWAZSTPgRHBOpRRUmvA1XcyuSluf35yHZSN3Tw6kJ08VpeflGHMfuj6JwQk9C8vOVBQF3CiSGKGQ8mmMleCK6IwzpWImWJidKQv5XhZe5VVvnpN8k3t6WHtKPmIjoZHQpkQHEm1krolIlXuOwLgJNQ+45K/Ix1GTE9PwaIXOJ+fzoBUYEjc+l7tpwkN5Zn4chDO5G4YX8TZkBhdBvJW/4flZsjj1KOPnc7ZixmR0ztmM8jCFuXPsZ/dI+rP/fOl8NC6YO7fEbhjYxXYUzsAg5r6LczQ+b+X2+6vhOznnc7qY8Xm0wxXo6Vl/or9P5c0zB95rGNtLXP73XkFTQnfWjmWOoQUv9/oRghYKCqFwX8vMgEQ84SRNUk2EoCmPdZwwTc90NO4/gfrcq9zqV56Nk6F6lHfKeWniOOZUMOQYSAciFiMzTTkQLsJUSqN4smLALzovV6q86sA8J4ZjlCGZy2wKggpx5keqc6gR7iG1eBZUv+zATE5F7vS8SHKyvzdI8uH7uk15IxB54XccdZRmLGQJCVQakChJKFGhkkRKDlHItZQZPxOI7H/J8cNvt38AgkzG5MPxD7ZWT6/3txrlr4WipKeeTpuQRzFAQAJtGLaVAvE44AkxqQqEASVk/JKn02+W3e/wMHwRjqz2e7+e3uDID1ef39T77Cn3b/5zxN+b/ANO+PF/<\/diagram><\/mxfile>&quot;,&quot;resize&quot;:true}"></div>
+<p></p><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;<mxfile agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/20.6.2 Chrome/106.0.5249.199 Electron/21.3.3 Safari/537.36\&quot; etag=\&quot;osHGeEsAQtQwx1a6leBx\&quot; host=\&quot;Electron\&quot; modified=\&quot;2022-12-22T12:30:28.899Z\&quot; pages=\&quot;1\&quot; type=\&quot;device\&quot; version=\&quot;20.6.2\&quot;><diagram id=\&quot;wNleSp8rjk_RZLYBW_x9\&quot; name=\&quot;Page-1\&quot;>5Vrbctw2Ev2aeYSKIHh9tGQrye5m4yolld192QKBpgYxbwZJXfz1aYDgDGfIkUcy11Jlq0YSCQKNvpw+3aBmw67Khx80b7Y/1xKKje9xrev7dsPeb3yf4g8OibqqQHQHY/LB3bIwcCOPw4gfUTcnrwt5sOhWq/nAjfoCbtBzo72ScKhCybvtMODmNPwWDmaYgR9B3W5HPak3mXojeDGf/7uSo9gkdLPbLZf1/cFeXV0XnWqmGrEPG3al67obrursD+Mg9J7oVF2Rvh8NDagASL2Q8DT1SZDlOeE0oYQzKrMs8DJJo2GXcYXbtOAZxsOODAMaGg0tVB03WwxPJOS8LzqnOZS86pSY7E49SQPGfMJYjruLiJKM8ZjESRhFeU6zNONucQNiWFOJWgMRddnUrerQae82PqrIMDrscmPU8ypeDuPejdsTL3/mTaOqW7x6D2U9W9Nr1Q5rZo+GD7GCW8kr9Ynbmdf4kSirNX81v1co9XpnZTnud1JayVXR1SiqrUuoK9gEnrm634KGCzRwtlTWoi/3Hn5CWUyJDieiEvoTwqVa8tL003aPhXNZp3t4em7da7Ho9/ln1AORsV91Sun5p6jFxFYNXJZwUcqz1yvcXTd1wbunjXMJUz5cQVGYwNpbvHCJc/DUOyKJhms0cZoc1ycWXCdE/Vv88eXH/+j6bz/fRL/967+MBHMpTrALihnhBv/maa4eAKVdbrvSZB/Fy6ZGM23yh5eb8D2O8ELdmgwUYOzHAVVaOrrMMRyOz6i/H3+vSsTpdaEy/M2/9BqMEUhyCOTuES9/a0G3F+3drfWZ0e2OF73T7apvO4Stdg9Ad/BwTEVI4oBzOv1oSMgx1e1uyCzcTsgxdiRzvyfAyPnJiWYpG+4dqxPqJQfOxwvn/0MGFFtVSMRjjklWCWeCHcT7Q6ZbDFc4o79fcpSFmd6eprkwjanHgEDiYcB9PycZJEBCoEFCRZj5yRjy59Dc/zkd1Hu/X/8vqGFSWoeQfNS17AWmGkK4kjbU+k4JaEdlQNolxlCXE+3Fgcjd5QQzXt+CEdBtTQpNrXK7ZH2rKmjNgOANz1ShOmU35a19jNgdCluGDvpktjzis6+QS3uvyoJXliBUUVzVRa3tEyY5JDkC8rLtdP0JJk8ikUCW7+lgjazfdUSTtGeRd5D3fuAf5n0aPZX2RxS+GgtEMxZw4MBBepIHkjQO0zCQJIgBf+WpR9KEeSSgSShz4Ys4l+fwgLeJLzfx+wWIvrNZYsFQYuOlSIHQ2U86gcbr2iCvg7YbcLTFBhMdYIxRrS28lTToPrH8H8MePO8sgoctr45GTqy9QTBYnTWUZrum7UsLC31qxbtuwJtJMzC9lwdDZ4s5x8t+N6BMCpqEkqYv8ySWRNW2yrZrHoZKDXM/98pmDuYappU1t9HcNrLKqnJXF32DHNtP+zE8i0CF883G3WdDHMhtWuNEZWUOm5h0gZ1Cn3ubr2VdGEfba3gQ0HTYepqQIyMZdYXgYGjOskijUCtDUdh7Iu8Z3eo7W5ith3f6oF1IC4MibW8FqcpKKBq+sxK5RQll7vH8AnqYh/oYQuGWb1DMEDplmAf1HEBea+sKa4a1yt7m/S0/EaQPZuaWD/M+m/NSaXHkFnKB2ra7HaxceGjAGGtjZZBojioo3vsnLy2GsiHmHWAqaIcwYeW1GCK7sKqzqVhsgxC51nIMzMDL5eCkSmGyGztLu+sQNOMNVVlYWPtxyPwp+YOyKG0KLoB3gwWg7VBtMGWWGHXqsrL7O8wMHN2aIi35qNZ0nvWldUyDlIWzesPe04L4q7VWZVYp3nfgHIoDku9igg924R0EQ4YxbXePRs/jORkriYGUE9ly3NqIuUM8W1n9LiIj8mHggKaXCrOEwx6s0E0AvQepBpOLZuoJePzU8SEM4CAy6re1RzXsEQCzwmhvVWyUaWStWQXy9+jtvpvYh5abWE+8P5qIxyyXhtgX25hgG9ICpqPbw0poQNtiIPeBGb2OZKxHEUOkePeVIvtU6zipvLrukVmla+Tvt0jwNw239ehe8+awz3/V2hzMSzMNj0rzYUcePKMun3dSiucnpTfl5/2R6GZoDDe7ZuB7xYCmwflBWK0bSmbd0OW+Z7066FlPdEYBi2Lw0piwOKV4QuKScM/nhIcsksCDLEv8F5yQjHjTEo0tNHEN9KDLX/Q4dWys8/yTZ6RZI3l5+tBh697s1GGKYn1wgLnYLLxaeflRJIREBktpmPgZi6I3cBRJnkN5qyVfelbyPW4WDibYd9oFpxAzH38k9NT4xfgK9ESKx5xL6qcZSXnKSQBhTngsBIE4zCAAGrMgf0FRTdYl+++KsrdQVMd/arxZR++r6ilc+2+4xp4ZhIVXyc8hxzzPfbHYo8goi8JFb/4KYlspwYvFGv16LBr7K/jTPxPUdO7lb0H1anGY0PVbZJozo8D+AlF4y+SyWg9Bg1kT8VOVa44O7PG8bTq+U1VdoLODlJEsThMS5JCSTFIgfpqKlEGQ+8m4+CWNuzrS4uD1/DqNJbar0Qm0xGnmeeuW/KV/bX2VEiPvNRpLGs9AcVXUvTyJBUoDL+Q8IEyIGLGQhCTLGScilIILltKci2/Aghg2PxMCT+J8GRjPYxmg2MPES7hJo5jxlVtFny3ghrGL8JA9/As/PMAOW79hTM5l9Xg9Z2dUytxbcjb1YpbCEqX/Yl5FfrT/V1ivo/GXKDw5DgO9OIzCCsV06dsGT8bntdx+dzV862A9pycLPg+OyqZ3PurP9Pe5LeRCsfmW5uUlLv97n4GuoFu1eV9qVvyXe329sjR/4fGxzwo1lpZ5XcqD3MuwqJKcZT7WJWxPUsokiUAkkHt5lIsxZ15Slxq3+zcVpjW50gMG0RKCPEi8JFn5TdlSdrIZIybPosSXFaboXIZM183Ys/29z9h3X3ZN9Ssl6/f5thSdf13q3e83x5k6voc87vavXct3PabYNb9vv/aeUcZZmmVcEA98ToLYj0gCPCVBImgeiYQm2UveM74aaN4gl78oPcf93q6n9+n5w9XHV/U+/Zr791/tts8m35BnH/4E<\/diagram><\/mxfile>&quot;,&quot;resize&quot;:true}"></div>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Nasdanika/drawio@dev/src/main/webapp/js/viewer-static.min.js"></script>
 <p></p>
 <ul>
@@ -136,22 +135,18 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
 </ul>
 <h2><a href="#table-of-contents" id="table-of-contents">Table of Contents</a></h2>
 <ol>
-  <li>
-    <a href="children/business-capabilties/index.html">Business Capabilities</a> - Business capabilities are building blocks for offerings.
+  <li>Business Capabilities - Business capabilities are building blocks for offerings.
     <ol>
-      <li>
-        <a href="children/business-capabilties/children/business-capability-one/index.html">Business Capability 1</a>
+      <li>Business Capability 1
         <ol></ol></li>
       <li>Business Capability 2
         <ol></ol></li>
     </ol></li>
   <li>Customer
     <ol></ol></li>
-  <li>
-    <a href="children/infrastructure/index.html">Infrastructure</a>
+  <li>Infrastructure
     <ol>
-      <li>
-        <a href="children/infrastructure/children/cloud/index.html">Cloud</a>
+      <li>Cloud
         <ol>
           <li>On Prem
             <ol>
@@ -161,11 +156,9 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
                     <ol></ol></li>
                 </ol></li>
             </ol></li>
-          <li>
-            <a href="children/infrastructure/children/cloud/children/public/index.html">Public</a>
+          <li>Public
             <ol>
-              <li>
-                <a href="children/infrastructure/children/cloud/children/public/children/aws/index.html">AWS</a>
+              <li>AWS
                 <ol></ol></li>
               <li>Azure
                 <ol></ol></li>
@@ -174,11 +167,9 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
             </ol></li>
         </ol></li>
     </ol></li>
-  <li>
-    <a href="children/F8-iYcjzHZroJMS6UX_3-5/index.html">Offerings</a> - Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.
+  <li>Offerings - Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.
     <ol>
-      <li>
-        <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a> - A long multi-line tooltip. For testing how it is rendered. Line after line, after line. Some lorem ipsum here. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+      <li>Product 1 - A long multi-line tooltip. For testing how it is rendered. Line after line, after line. Some lorem ipsum here. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
         <ol></ol></li>
       <li>Service 1
         <ol></ol></li>
@@ -203,12 +194,12 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
         <div class="col nsd-app-footer">
           <ul class="nav nsd-app-footer-navs">
             <li class="nav-item">
-              <a href="https://github.com/Nasdanika/demo-drawio-actions" data-nsd-action-uuid="fa392f58-3ef0-4a15-964b-09e47bc64bdc" class="nav-link"><span class="fab fa-github nsd-app-label-icon"></span>Source</a>
+              <a href="https://github.com/Nasdanika/demo-drawio-actions" data-nsd-action-uuid="81cdbacd-1012-4b27-b51e-1eec73625ed3" class="nav-link"><span class="fab fa-github nsd-app-label-icon"></span>Source</a>
             </li>
             <li class="nav-item"><span class="navbar-text">&nbsp;•&nbsp;</span>
             </li>
             <li class="nav-item">
-              <a href="https://docs.nasdanika.org/modules/demos/modules/app-drawio/modules/actions/index.html" data-nsd-action-uuid="c7bbfae1-5f6a-4369-8fd3-d64e96feba63" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Documentation</a>
+              <a href="https://docs.nasdanika.org/modules/demos/modules/app-drawio/modules/actions/index.html" data-nsd-action-uuid="9ae857c5-7be0-4c11-8d75-9727a835ecce" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Documentation</a>
             </li>
           </ul>
         </div>
