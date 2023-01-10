@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -38,6 +39,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
+import org.nasdanika.common.BiSupplier;
 import org.nasdanika.common.Context;
 import org.nasdanika.common.DefaultConverter;
 import org.nasdanika.common.Diagnostic;
@@ -57,6 +59,7 @@ import org.nasdanika.drawio.Page;
 import org.nasdanika.drawio.comparators.LabelModelElementComparator;
 import org.nasdanika.emf.EObjectAdaptable;
 import org.nasdanika.emf.EmfUtil;
+import org.nasdanika.emf.persistence.NcoreObjectLoaderSupplier;
 import org.nasdanika.exec.content.ContentFactory;
 import org.nasdanika.exec.resources.Container;
 import org.nasdanika.exec.resources.ReconcileAction;
@@ -79,57 +82,82 @@ import org.nasdanika.html.model.app.gen.LinkJsTreeNodeSupplierFactoryAdapter;
 import org.nasdanika.html.model.app.gen.NavigationPanelConsumerFactoryAdapter;
 import org.nasdanika.html.model.app.gen.Util;
 import org.nasdanika.html.model.app.util.ActionProvider;
-import org.nasdanika.html.model.app.util.AppObjectLoaderSupplier;
 import org.nasdanika.html.model.html.gen.ContentConsumer;
 import org.nasdanika.ncore.util.NcoreUtil;
 import org.nasdanika.resources.FileSystemContainer;
 
 import com.redfin.sitemapgenerator.ChangeFreq;
 
-public class DrawioSemanticMappingGenerator {
-
-	private static final File GENERATED_MODELS_BASE_DIR = new File("target/model-doc");
-	private static final File MODELS_DIR = new File(GENERATED_MODELS_BASE_DIR, "models");
-	private static final File ACTION_MODELS_DIR = new File(GENERATED_MODELS_BASE_DIR, "actions");
-	private static final File RESOURCE_MODELS_DIR = new File(GENERATED_MODELS_BASE_DIR, "resources");
-	
-	private static final URI MODELS_URI = URI.createFileURI(MODELS_DIR.getAbsolutePath() + "/");	
-	private static final URI ACTION_MODELS_URI = URI.createFileURI(ACTION_MODELS_DIR.getAbsolutePath() + "/");	
-	private static final URI RESOURCE_MODELS_URI = URI.createFileURI(RESOURCE_MODELS_DIR.getAbsolutePath() + "/");	
+public class DrawioSemanticMappingGeneratorRefactored {
 	
 	/**
-	 * Loads a model from YAML, creates a copy and stores to XMI.
-	 * @param name
+	 * Creates a resource set for loading the semantic model. 
+	 * Override to customize, e.g. add a resource factory specific for the semantic model.
 	 * @param progressMonitor
-	 * @throws IOException 
+	 * @return
+	 */
+	protected ResourceSet createSemanticModelResourceSet(Context context, ProgressMonitor progressMonitor) {
+		return createResourceSet(context, progressMonitor);
+	}
+	
+	/**
+	 * Creates a resource set for loading models.
+	 * Override to customize, e.g. register {@link EPackage}'s and adapter factories.
+	 * @param progressMonitor
+	 * @return
+	 */
+	protected ResourceSet createResourceSet(Context context, ProgressMonitor progressMonitor) {
+		return Util.createResourceSet(context, progressMonitor);
+	}	
+	
+	/**
+	 * Loads a model using {@link NcoreObjectLoaderSupplier} which supports YAML, JSON, and. Optionally creates a copy and stores to XMI.
+	 * @param uri Model URI
+	 * @param copyURI Copy URI. If not null, the loaded model is copied and saved to this URI.
+	 * @param context
+	 * @param progressMonitor
+	 * @return Loaded model
 	 * @throws Exception
 	 */
-	protected void loadSemanticModel(String name, Context context, ProgressMonitor progressMonitor) throws IOException {
-		URI resourceURI = URI.createFileURI(new File("model/" + name).getAbsolutePath());		
-		ResourceSet rSet = Util.createResourceSet(context, progressMonitor);		
-		Resource resource = rSet.getResource(resourceURI, true);
+	protected Resource loadSemanticModel(
+			URI uri,
+			URI copyURI,
+			Context context, 
+			ProgressMonitor progressMonitor) throws IOException {		
+		ResourceSet resourceSet = Util.createResourceSet(context, progressMonitor);		
+		Resource resource = resourceSet.getResource(uri, true);
 
-		Resource copyResource = rSet.createResource(URI.createURI(name + ".xml").resolve(MODELS_URI));
+		if (copyURI == null) {
+			return resource;
+		}
+		
+		Resource copyResource = resourceSet.createResource(copyURI);
 		copyResource.getContents().addAll(EcoreUtil.copyAll(resource.getContents()));
 		copyResource.save(null);
+		return copyResource;
 	}
 		
 	/**
-	 * Loads instance model from previously generated XMI, diagnoses, generates action model.
+	 * Adapts the semantic model to an action model.
+	 * @throws org.eclipse.emf.common.util.DiagnosticException 
+	 * @throws IOException 
 	 * @throws Exception
 	 */
-	public Map<EObject,Action>  generateActionModel(String name, Context context, ProgressMonitor progressMonitor) throws Exception {
-		ResourceSet instanceModelsResourceSet = Util.createResourceSet(context, progressMonitor);
-		Resource instanceModelResource = instanceModelsResourceSet.getResource(URI.createURI(name + ".xml").resolve(MODELS_URI), true);
-
-		org.eclipse.emf.common.util.Diagnostic instanceDiagnostic = org.nasdanika.emf.EmfUtil.resolveClearCacheAndDiagnose(instanceModelsResourceSet, context);
+	
+	public BiSupplier<Resource, Map<EObject,Action>>  generateActionModel(
+			Resource semanticModelResource,
+			URI actionModelURI,
+			Context context, 
+			ProgressMonitor progressMonitor) throws org.eclipse.emf.common.util.DiagnosticException, IOException {
+		ResourceSet semanticModelResourceSet = semanticModelResource.getResourceSet();
+		org.eclipse.emf.common.util.Diagnostic instanceDiagnostic = org.nasdanika.emf.EmfUtil.resolveClearCacheAndDiagnose(semanticModelResourceSet, context);
 		int severity = instanceDiagnostic.getSeverity();
 		if (severity != org.eclipse.emf.common.util.Diagnostic.OK) {
 			EmfUtil.dumpDiagnostic(instanceDiagnostic, 2, System.err);
 			throw new org.eclipse.emf.common.util.DiagnosticException(instanceDiagnostic);
 		}
 		
-		instanceModelsResourceSet.getAdapterFactories().add(new ActionProviderAdapterFactory(context) {
+		semanticModelResourceSet.getAdapterFactories().add(new ActionProviderAdapterFactory(context) {
 			
 			private void collect(Notifier target, org.eclipse.emf.common.util.Diagnostic source, Collection<org.eclipse.emf.common.util.Diagnostic> accumulator) {
 				List<?> data = source.getData();
@@ -174,45 +202,55 @@ public class DrawioSemanticMappingGenerator {
 			
 		});
 		
-		ResourceSet actionModelsResourceSet = Util.createResourceSet(context, progressMonitor);
-		actionModelsResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(org.eclipse.emf.ecore.resource.Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		ResourceSet actionModelsResourceSet = createResourceSet(context, progressMonitor);
 		
-		org.eclipse.emf.ecore.resource.Resource actionModelResource = actionModelsResourceSet.createResource(URI.createURI(name + ".xml").resolve(ACTION_MODELS_URI));
+		org.eclipse.emf.ecore.resource.Resource actionModelResource = actionModelsResourceSet.createResource(actionModelURI);
 		
 		Map<EObject,Action> registry = new HashMap<>();
-		EObject instance = instanceModelResource.getContents().get(0);
-		Action rootAction = EObjectAdaptable.adaptTo(instance, ActionProvider.class).execute(registry::put, progressMonitor);
-		Context uriResolverContext = Context.singleton(Context.BASE_URI_PROPERTY, URI.createURI("temp://" + UUID.randomUUID() + "/" + UUID.randomUUID() + "/"));
-		BiFunction<Label, URI, URI> uriResolver = org.nasdanika.html.model.app.util.Util.uriResolver(rootAction, uriResolverContext);
-		Adapter resolver = EcoreUtil.getExistingAdapter(rootAction, EObjectActionResolver.class);
-		if (resolver instanceof EObjectActionResolver) {														
-			org.nasdanika.html.emf.EObjectActionResolver.Context resolverContext = new org.nasdanika.html.emf.EObjectActionResolver.Context() {
-
-				@Override
-				public Action getAction(EObject semanticElement) {
-					return registry.get(semanticElement);
-				}
-
-				@Override
-				public URI resolve(Action action, URI base) {
-					return uriResolver.apply(action, base);
-				}
-				
-			};
-			((EObjectActionResolver) resolver).execute(resolverContext, progressMonitor);
+		for (EObject semanticElement: semanticModelResource.getContents()) {
+			Action action = EObjectAdaptable.adaptTo(semanticElement, ActionProvider.class).execute(registry::put, progressMonitor);
+			Context uriResolverContext = Context.singleton(Context.BASE_URI_PROPERTY, URI.createURI("temp://" + UUID.randomUUID() + "/" + UUID.randomUUID() + "/"));
+			BiFunction<Label, URI, URI> uriResolver = org.nasdanika.html.model.app.util.Util.uriResolver(action, uriResolverContext);
+			Adapter resolver = EcoreUtil.getExistingAdapter(action, EObjectActionResolver.class);
+			if (resolver instanceof EObjectActionResolver) {														
+				org.nasdanika.html.emf.EObjectActionResolver.Context resolverContext = new org.nasdanika.html.emf.EObjectActionResolver.Context() {
+	
+					@Override
+					public Action getAction(EObject semanticElement) {
+						return registry.get(semanticElement);
+					}
+	
+					@Override
+					public URI resolve(Action action, URI base) {
+						return uriResolver.apply(action, base);
+					}
+					
+				};
+				((EObjectActionResolver) resolver).execute(resolverContext, progressMonitor);
+			}
+			actionModelResource.getContents().add(action);
 		}
-		actionModelResource.getContents().add(rootAction);
-
 		actionModelResource.save(null);
 		
-		return registry;
+		return BiSupplier.of(actionModelResource, registry);
 	}
 	
 	/**
 	 * Generates a resource model from an action model.
+	 * @throws IOException 
 	 * @throws Exception
 	 */
-	public void generateResourceModel(String name, Map<EObject, Action> registry, Context context, ProgressMonitor progressMonitor) throws Exception {
+	public Resource generateResourceModel(
+			Resource actionResource, 
+			Map<EObject, Action> registry,
+			URI rootActionURI,
+			URI pageTemplateURI,
+			URI resourceURI, 
+			String containerName,
+			File resourceWorkDir,
+			Context context, 
+			ProgressMonitor progressMonitor) throws IOException {
+		
 		java.util.function.Consumer<Diagnostic> diagnosticConsumer = diagnostic -> {
 			if (diagnostic.getStatus() == Status.FAIL || diagnostic.getStatus() == Status.ERROR) {
 				System.err.println("***********************");
@@ -225,33 +263,30 @@ public class DrawioSemanticMappingGenerator {
 			};
 		};
 		
-		Context modelContext = Context.singleton("model-name", name);
-		String actionsResource = "model/root-action.yml";
-		Action root = (Action) Objects.requireNonNull(AppObjectLoaderSupplier.loadObject(actionsResource, diagnosticConsumer, modelContext, progressMonitor), "Loaded null from " + actionsResource);
-		root.eResource().getResourceSet().getAdapterFactories().add(new AppAdapterFactory());
+		Context rootActionContext = context.compose(Context.singleton("action-resource", actionResource.getURI().toString()));
+		ResourceSet rootActionResourceSet = createResourceSet(rootActionContext, progressMonitor);
+		Action root = (Action) rootActionResourceSet.getEObject(rootActionURI, true);
 		
 		Container container = ResourcesFactory.eINSTANCE.createContainer();
-		container.setName(name);
+		container.setName(containerName);
 		container.setReconcileAction(ReconcileAction.OVERWRITE);
 		
-		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		Resource modelResource = resourceSet.createResource(URI.createURI(name + ".xml").resolve(RESOURCE_MODELS_URI));
+		ResourceSet resourceSet = createResourceSet(context, progressMonitor);
+		Resource modelResource = resourceSet.createResource(resourceURI);
 		modelResource.getContents().add(container);
 		
-		String pageTemplateResource = "model/page-template.yml";
-		org.nasdanika.html.model.bootstrap.Page pageTemplate = (org.nasdanika.html.model.bootstrap.Page) Objects.requireNonNull(AppObjectLoaderSupplier.loadObject(pageTemplateResource, diagnosticConsumer, modelContext, progressMonitor), "Loaded null from " + pageTemplateResource);
+		org.nasdanika.html.model.bootstrap.Page pageTemplate = (org.nasdanika.html.model.bootstrap.Page) actionResource.getResourceSet().getEObject(pageTemplateURI, true);
 		
 		// Generating content file from action content 
 		
-		File pagesDir = new File(RESOURCE_MODELS_DIR, "pages");
+		File pagesDir = new File(resourceWorkDir, "pages");
 		pagesDir.mkdirs();
 		
 		Util.generateSite(
 				root, 
 				pageTemplate,
 				container,
-				contentProviderContext -> (cAction, uriResolver, pMonitor) -> getActionContent(cAction, uriResolver, registry, contentProviderContext, diagnosticConsumer, pMonitor),
+				contentProviderContext -> (cAction, uriResolver, pMonitor) -> getActionContent(cAction, uriResolver, registry, resourceWorkDir, contentProviderContext, diagnosticConsumer, pMonitor),
 				contentProviderContext -> (page, baseURI, uriResolver, pMonitor) -> getPageContent(page, baseURI, uriResolver, pagesDir, contentProviderContext, progressMonitor),
 				context,
 				progressMonitor);
@@ -270,7 +305,9 @@ public class DrawioSemanticMappingGenerator {
 				Files.copy(contentStream, new File(pageFile.getCanonicalPath().replace(".xml", ".html")).toPath(), StandardCopyOption.REPLACE_EXISTING);
 				progressMonitor.worked(1, "[Page xml -> html] " + pageFile.getName());
 			}
-		}				
+		}
+		
+		return modelResource;
 	}
 	
 	/**
@@ -553,6 +590,7 @@ public class DrawioSemanticMappingGenerator {
 			Action action, 
 			BiFunction<Label, URI, URI> uriResolver,
 			Map<EObject, Action> registry,
+			File resourceWorkDir,
 			Context context,
 			java.util.function.Consumer<Diagnostic> diagnosticConsumer,
 			ProgressMonitor progressMonitor) {
@@ -561,7 +599,7 @@ public class DrawioSemanticMappingGenerator {
 		
 		Context actionContentContext = createActionContentContext(action, uriResolver, registry, (ContentConsumer) contentContributions::add, context, progressMonitor);
 		
-		File contentDir = new File(RESOURCE_MODELS_DIR, "content");
+		File contentDir = new File(resourceWorkDir, "content");
 		contentDir.mkdirs();
 		
 		String fileName = action.getUuid() + ".html";
@@ -667,75 +705,168 @@ public class DrawioSemanticMappingGenerator {
 	
 	/**
 	 * Generates files from the previously generated resource model.
+	 * @throws org.eclipse.emf.common.util.DiagnosticException 
+	 * @throws IOException 
 	 * @throws Exception
 	 */
-	public void generateContainer(String name, Context context, ProgressMonitor progressMonitor) throws Exception {
+	public Map<String, Collection<String>> generateContainer(
+			Resource resourceModel,
+			File workDir,
+			File outputDir,
+			Predicate<String> cleanPredicate,
+			String siteMapDomain,
+			String containerName, 
+			Context context, 
+			ProgressMonitor progressMonitor) throws org.eclipse.emf.common.util.DiagnosticException, IOException {
+		Map<String, Collection<String>> errors = new TreeMap<>();
 		
-		File siteDir = new File("target/model-doc/site");
 		Util.generateContainer(
-				URI.createURI(name + ".xml").resolve(RESOURCE_MODELS_URI), 
-				new FileSystemContainer(siteDir), 
+				resourceModel, 
+				new FileSystemContainer(workDir), 
 				context, 
 				progressMonitor);
 		
-		// Cleanup docs, keep CNAME, favicon.ico, and images directory. Copy from target/model-doc/site/nasdanika
-		Predicate<String> cleanPredicate = path -> {
-			return !"CNAME".equals(path) && !"favicon.ico".equals(path) && !path.startsWith("images/");
-		};
-
-		File docsDir = new File("docs");
-		org.nasdanika.common.Util.copy(new File(siteDir, "high-level-architecture.drawio"), docsDir, true, cleanPredicate, null);
-		
-		int[] problems = { 0 };
+		org.nasdanika.common.Util.copy(new File(workDir, containerName), outputDir, true, cleanPredicate, null);
 		
 		Util.generateSitemapAndSearch(
-				docsDir, 
-				"https://docs.nasdanika.org/demo-drawio-semantic-mapping", 
-				(file, path) -> path.endsWith(".html"), 
-				ChangeFreq.WEEKLY, 
-				(file, path) -> path.endsWith(".html") && !"search.html".equals(path), 
-				(path, error) -> {
-					System.err.println("[" + path +"] " + error);
-					++problems[0];
-				});
+				outputDir, 
+				siteMapDomain, 
+				this::isSiteMap, 
+				getChangeFrequency(), 
+				this::isSearch, 
+				(path, error) ->  {
+					progressMonitor.worked(Status.ERROR, 1, "[" + path +"] " + error);
+					errors.computeIfAbsent(path, p -> new ArrayList<>()).add(error);
+				});		
 		
-		if (problems[0] != 0) {
-			throw new ExecutionException("There are problems with pages: " + problems[0]);
+		return errors;
+	}
+	
+	protected ChangeFreq getChangeFrequency() {
+		return ChangeFreq.WEEKLY;
+	}
+	
+	protected boolean isSiteMap(File file, String path) {
+		return path.endsWith(".html");
+	}
+	
+	protected boolean isSearch(File file, String path) {
+		return path.endsWith(".html") && !"search.html".equals(path);
+	}
+	
+	public void generate() throws IOException, org.eclipse.emf.common.util.DiagnosticException  {
+		URI semanticModelURI = URI.createFileURI(new File("model/high-level-architecture.drawio").getAbsolutePath());
+		
+		String rootActionResource = "model/root-action.yml";
+		URI rootActionURI = URI.createFileURI(new File(rootActionResource).getAbsolutePath());//.appendFragment("/");
+		
+		String pageTemplateResource = "model/page-template.yml";
+		URI pageTemplateURI = URI.createFileURI(new File(pageTemplateResource).getAbsolutePath());//.appendFragment("/");
+		
+		String siteMapDomain = "https://docs.nasdanika.org/demo-drawio-semantic-mapping";		
+		
+		Map<String, Collection<String>> errors = generate(
+				semanticModelURI,
+				rootActionURI,
+				pageTemplateURI,
+				siteMapDomain,
+				new File("docs"),							
+				null, // new File("target/model-doc"),
+				false
+				);
+				
+		if (!errors.isEmpty()) {
+			throw new ExecutionException("There are problems with pages: " + errors);
 		};
-	}
+		
+	}	
 	
-	public void generate() throws Exception {
-		org.nasdanika.common.Util.delete(MODELS_DIR);
-		org.nasdanika.common.Util.delete(ACTION_MODELS_DIR);
-		org.nasdanika.common.Util.	delete(RESOURCE_MODELS_DIR);
+	public Map<String, Collection<String>> generate(
+		URI semanticModelURI,
+		URI rootActionURI,
+		URI pageTemplateURI,
+		String siteMapDomain,
+		File outputDir,
+		File workDir,
+		boolean cleanWorkDir) throws IOException, org.eclipse.emf.common.util.DiagnosticException  {
 		
-		MODELS_DIR.mkdirs();
-		ACTION_MODELS_DIR.mkdirs();
-		RESOURCE_MODELS_DIR.mkdirs();
-
-		ProgressMonitor progressMonitor = new PrintStreamProgressMonitor();		
-		MutableContext context = Context.EMPTY_CONTEXT.fork();		
-		generateSite("high-level-architecture.drawio", context, progressMonitor);
-	}
+		String modelName = semanticModelURI.lastSegment();
+		if (org.nasdanika.common.Util.isBlank(modelName)) {
+			modelName = "semantic-model";
+		}
+		if (workDir == null) {
+			workDir = Files.createTempDirectory(modelName).toFile();
+			cleanWorkDir = true;
+		}
+		
+		if (!workDir.isDirectory()) {
+			if (!workDir.mkdirs()) {
+				throw new IOException("Cannot create a working directory: " + workDir.getAbsolutePath());
+			}
+		}
+		
+		try {
+			File modelsDir = new File(workDir, "models");
+			File actionModelsDir = new File(workDir, "actions");
+			File resourceModelsDir = new File(workDir, "resources");
+			File siteWorkDir = new File(workDir, "site");			
+			
+			org.nasdanika.common.Util.delete(modelsDir);
+			org.nasdanika.common.Util.delete(actionModelsDir);
+			org.nasdanika.common.Util.delete(resourceModelsDir);
+			org.nasdanika.common.Util.delete(siteWorkDir);
+			
+			modelsDir.mkdirs();
+			actionModelsDir.mkdirs();
+			resourceModelsDir.mkdirs();
+			
+			MutableContext context = Context.EMPTY_CONTEXT.fork();		
+			context.put("model-name", modelName);
 	
-	private void generateSite(String name, Context context, ProgressMonitor progressMonitor) throws Exception {
-		System.out.println("Generating site: " + name);
-		
-		long start = System.currentTimeMillis();
-		loadSemanticModel(name, context, progressMonitor);
-		System.out.println("\tGenerated instance model in " + (System.currentTimeMillis() - start) + " milliseconds");
-		start = System.currentTimeMillis();
-		
-		Map<EObject, Action> registry = generateActionModel(name, context, progressMonitor);
-		System.out.println("\tGenerated action model in " + (System.currentTimeMillis() - start) + " milliseconds");
-		start = System.currentTimeMillis();
-		
-		generateResourceModel(name, registry, context, progressMonitor);
-		System.out.println("\tGenerated resource model in " + (System.currentTimeMillis() - start) + " milliseconds");
-		start = System.currentTimeMillis();
-		
-		generateContainer(name, context, progressMonitor);
-		System.out.println("\tGenerated site in " + (System.currentTimeMillis() - start) + " milliseconds");
+			try (ProgressMonitor progressMonitor = new PrintStreamProgressMonitor()) {						
+				URI modelsURI = URI.createFileURI(modelsDir.getAbsolutePath() + "/");							
+				URI copyURI = URI.createURI(modelName + ".xml").resolve(modelsURI);		
+				Resource semanticModelResource = loadSemanticModel(semanticModelURI, copyURI, context, progressMonitor.split("Loading semantic model", 1));
+				
+				URI actionModelsURI = URI.createFileURI(actionModelsDir.getAbsolutePath() + "/");	
+				URI actionModelURI = URI.createURI(modelName + ".xml").resolve(actionModelsURI);
+				BiSupplier<Resource, Map<EObject, Action>> rootActionAndRegistry = generateActionModel(semanticModelResource, actionModelURI, context, progressMonitor.split("Generating action model", 1));
+				
+				URI resourceModelsURI = URI.createFileURI(resourceModelsDir.getAbsolutePath() + "/");	
+				URI resourceURI = URI.createURI(modelName + ".xml").resolve(resourceModelsURI);
+				Resource resourceModel = generateResourceModel(
+						rootActionAndRegistry.getFirst(), 
+						rootActionAndRegistry.getSecond(), 
+						rootActionURI,
+						pageTemplateURI,
+						resourceURI, 
+						modelName, 
+						resourceModelsDir,
+						context, 
+						progressMonitor.split("Generating resource model", 1));
+				
+	
+				// Cleanup docs, keep CNAME, favicon.ico, and images directory. Copy from target/model-doc/site/nasdanika
+				Predicate<String> cleanPredicate = path -> {
+					return !"CNAME".equals(path) && !"favicon.ico".equals(path) && !path.startsWith("images/");
+				};
+				
+				
+				return generateContainer(
+						resourceModel,
+						siteWorkDir,
+						outputDir,
+						cleanPredicate,
+						siteMapDomain,
+						modelName, 
+						context, 
+						progressMonitor.split("Generating container", 1));
+			}
+		} finally {
+			if (cleanWorkDir) {
+				org.nasdanika.common.Util.delete(workDir);
+			}
+		}
 	}
 
 }

@@ -4,7 +4,7 @@ app-action:
   location: https://www.nasdanika.org 
   tooltip: Root action
   children:
-    - app-action-reference: "../target/model-doc/actions/high-level-architecture.drawio.xml#/"
+    - app-action-reference: "${action-resource}#/" # ../target/model-doc/actions/high-level-architecture.drawio.xml
     - app-action:
         location: ${base-uri}search.html
         icon: fas fa-search
