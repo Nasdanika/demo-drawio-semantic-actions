@@ -72,24 +72,24 @@ window.nsdJsTreeSearchCallback = function(str, node) {
     <div class="container-fluid nsd-app-container">
       <div class="row">
         <div class="col nsd-app-header">
-          <a href="https://www.nasdanika.org" title="Root action" data-nsd-label-uuid="7a264307-d750-44f6-8039-c6d4cb4787eb" class="nsd-app-header-title">
+          <a href="https://www.nasdanika.org" title="Root action" data-nsd-label-uuid="98b4c731-7b9a-42f3-a2e5-fe49cc420b9e" class="nsd-app-header-title">
             <img src="https://docs.nasdanika.org/images/nasdanika-logo.png" class="nsd-app-label-icon">Nasdanika</a>
           <ul class="nav nsd-app-header-navs">
             <li class="nav-item">
-              <a href="search.html" data-nsd-label-uuid="7186cc77-ca05-42ea-9244-23eca5032af9" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
+              <a href="search.html" data-nsd-label-uuid="fb3a7780-0e85-45dd-be8d-a6c69950635f" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="row">
         <div class="col nsd-app-navbar">
-          <ul class="navbar navbar-light navbar-expand-lg"><span data-nsd-label-uuid="ce84d97c-0600-4fb3-88a8-e56e65ae44f2" class="navbar-brand">Semantic Mapping Demo</span>
-            <button type="button" data-toggle="collapse" data-target="#nsd_4q" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+          <ul class="navbar navbar-light navbar-expand-lg"><span data-nsd-label-uuid="64c86c01-dab0-43c8-ad71-f10b39f50faf" class="navbar-brand">Semantic Mapping Demo</span>
+            <button type="button" data-toggle="collapse" data-target="#nsd_4g" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
             </button>
-            <div id="nsd_4q" class="collapse navbar-collapse">
+            <div id="nsd_4g" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a href="info.html" data-nsd-label-uuid="e18873e5-bbf7-4b79-971e-b83ce3cc7a57" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
+                  <a href="info.html" data-nsd-label-uuid="6fa39eee-5676-41a4-bad6-17716ed4f4ca" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
                 </li>
               </ul>
             </div>
@@ -101,13 +101,13 @@ window.nsdJsTreeSearchCallback = function(str, node) {
           <input type="text" id="8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput" title="Full-text search. You can use wildcards, e.g. 'foo*' or 'f*o'; title or content fields, e.g. 'title:foo* bar'; boosts, e.g. 'foo^10 bar'; fuzzy matches, e.g. 'foo~1'; and term presence, e.g. '+foo bar -baz'" class="form-control mt-1">
           <div id="8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"></div>
           <script>$(document).ready( function() {
-$('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='children/infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/children/aws/index.html';"},"data-nsd-label-uuid":"51574f90-a5d2-4565-b3f2-b94915de9372","id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","type":"leaf"}],"data-nsd-label-uuid":"d18f00e8-b54f-4802-a7e9-e64dec2a007e","id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public"}],"data-nsd-label-uuid":"64340588-e7e9-4def-9d0e-adc800bcaaab","id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud"}],"data-nsd-label-uuid":"6db8129d-1478-4be3-bb75-70ad3fc06070","id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='children/business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='children/business-capabilties/children/business-capability-one/index.html';"},"data-nsd-label-uuid":"348e5649-22fa-4756-9911-0d4df49c7748","id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","type":"leaf"}],"data-nsd-label-uuid":"93e2c04e-cdb7-4e4f-9b48-ae06d77faa6d","id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"data-nsd-label-uuid":"26a74f45-c296-4d7c-b417-dcd0df7c31ef","id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","type":"leaf"}],"data-nsd-label-uuid":"68d1852d-b230-424c-95df-2dfbebd4d934","id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
+$('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='children/infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/children/aws/index.html';"},"data-nsd-label-uuid":"3db8c965-1760-4bc3-b4b0-924820e5a520","id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","type":"leaf"}],"data-nsd-label-uuid":"27365d65-ff31-4145-a791-136c9f714988","id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public"}],"data-nsd-label-uuid":"379604c5-3e28-4c69-88c7-41797628a3dc","id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud"}],"data-nsd-label-uuid":"b5ced1cc-82cc-4a7e-8f76-dc78cb28d5b2","id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='children/business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='children/business-capabilties/children/business-capability-one/index.html';"},"data-nsd-label-uuid":"d5ab8750-9348-4e7a-a6b6-0004ca7eb958","id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","type":"leaf"}],"data-nsd-label-uuid":"0f4d4d6b-fccc-4628-8ace-b0365492dc11","id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"data-nsd-label-uuid":"69722705-19c2-4857-840d-b911f80c8436","id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","type":"leaf"}],"data-nsd-label-uuid":"af1ef92e-103c-4f47-a949-356b7561bbf9","id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
 // Tokens: searchInputSelector, timer, treeSelector
 $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').keyup(function () {
-    if (window['nsd_jstTreeSearchTimer_nsd_4z']) { 
-		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_4z']); 
+    if (window['nsd_jstTreeSearchTimer_nsd_4p']) { 
+		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_4p']); 
 	}
-    window['nsd_jstTreeSearchTimer_nsd_4z'] = setTimeout(function () {
+    window['nsd_jstTreeSearchTimer_nsd_4p'] = setTimeout(function () {
       var v = $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').val();
       $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(true).search(v);
     }, 250);
@@ -115,38 +115,42 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
 
 });</script>
         </div>
-        <div data-nsd-label-uuid="ce84d97c-0600-4fb3-88a8-e56e65ae44f2" class="col nsd-app-content-panel">
+        <div data-nsd-label-uuid="64c86c01-dab0-43c8-ad71-f10b39f50faf" class="col nsd-app-content-panel">
           <div class="container-fluid">
             <div class="row nsd-app-content-panel-content-row">
               <div class="col">
                 <div class="container-fluid">
                   <div class="row">
                     <div class="col"><div class="markdown-body"><p>Doc</p>
-<p></p><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;<mxfile agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/20.6.2 Chrome/106.0.5249.199 Electron/21.3.3 Safari/537.36\&quot; etag=\&quot;osHGeEsAQtQwx1a6leBx\&quot; host=\&quot;Electron\&quot; modified=\&quot;2022-12-22T12:30:28.899Z\&quot; pages=\&quot;1\&quot; type=\&quot;device\&quot; version=\&quot;20.6.2\&quot;><diagram id=\&quot;wNleSp8rjk_RZLYBW_x9\&quot; name=\&quot;Page-1\&quot;>5VpZc+M2Ev41eoSL9/E4lsdJdnc2U+WkspuXFAg0LWR4DUj6mF+fBghKpEjasswdu7JVmjEFAo0+vv66QXHjbvOHHyStdp9KDtnGsaiU5X29ca82jmPjPxxiZVEAa0Zj/MF8dX3PjDx2I05gmzlpmfHRolsppgM34huYQcuMtoLDWIWcNrtuwMyp6C2MZqiBH0Hc7no9bWsw9YbRbDr/N8F7sZFvZtc7ysv70V5NWWaNqIYauR837laWZdNdlcmfykHoPdaIsiBt2xvKIPJ4HDJiBZZFvDRxSRTRiIAfQOBT8LzU6XbpV5hNM5pgPPRINyChklBD0VC1RXeHQ0rbrDGaQ06LRrDB7q7jQcwCj/jUZ8TjLiNRYFMSW1accBZTy+JmcQWsW1OwUgJhZV6VtWjQaR82TrBxXIyOe7lR6lkFzbtx68bsiZefaFWJ4havriAvJ2taKepuzeRW9yFacM1pIb5QPfMaPxxl1eqvpPcCpV7vrcz7/Ral5VRkTYmi6jKHsoCNZ6mr+x1IuEADJ0t5ydr84OEnlMWUaHAiKiG/IFyKOS8NP3XzmBmXNbKFp+eWrWSzfp9+ej0QGYdVS0pPP1nJBrZKoDyHi5yfvF7g7rIqM9o8bZxJmPxhC1mmAqu/4oVJnNFd64gkKirRxGFyXC8suI6I+C/789uPv8vyH59ugl//84dLvKkUI9gERY1QhX91NxUPgNIud02uss/Gy6pEM3Xy+5cb/wpHaCZuVQYyUPbjgMg1HV2mGA7DZ7ZzGL8SOeL0OhMJ/k+/tRKUEUhyCOTmES9/rUHWF/XdrfaZ0u2OZq3RbdvWDcJWmhsgG3g4piIkccA5jXxUJGSY6nY/pBbuBuQYGpK5PxBgYPxkRLux2303rE5sKxo5Hy+M/8cMyHYi44jHFJOsYMYEPYjfx0w3Gy5/Qn8/pygLM71epDnPjhM3hYikfpwgyYJFqGczQjllLLY9j9vOGTT3f04H5cHv1/8LahiU1i4kn2XJW4aphhAuuA61vBMM6l4Z4HqJMtTkRH0xErm/HGDGamtQApqdSqGhVWaXpK1FAbUaYLSiichEI/SmtNa3EbtdYUvQQV/Ulkd89gy51Pciz2ihCUJk2bbMSqnvuJxClCIgL+tGll9gcCdgESTpgQ7WyPp9RzRIezewRnnveM447+PgqbQ/ovDVWCCYsIABBw7aizxgJcx3MeWJw32feBZNSZxGnFA39FMWuOAE0Sk8YG3Cy014NQPRDzpLNBhybLwEyRA6h0kLaLwuFfIaqJsORztsMNEByhhR68JbcIXuheX/6vagaaMR3G25PRpZWHuDYNA6S8jVdlXd5hoWcmnFh6bDm0ozUL2XBV1nizlH83Y/IFQKqoTiqi+zOJZEUddCt2sWhkp0c7+2QmcO5hqmlTa3klQ3skKrcldmbYUc2w77MTyLQIHz1cbNV0UcyG1S4kShZXabqHSBvUJfW52veZkpR+treGBQNdh6qpAjIyl1GaOgaE6zSCVQK0VR2Hsi7yndyjtdmLWH9/qgXUgLnSJ1qwWJQkvIKrq3ErlFMKG+4/kFZDcP9VGEQjXfoJgudEIxD+rZgbyU2hXaDG2V/pq2t3QhSB/VzB3t5n1V56Vc48gspAy1rfc7aLnwUIEyVsdKIVEdVVC89W+aawwlXcwbwFSQBmFMy6sxRHphUSZDsdgGIXK15RiYjpfzzkmFwGRXduZ61y5oyhui0LDQ9uOQ+pPTB6FRWmWUAW06C0DqoVJhSi1R6pR5ofc3mOk4ulZFmtNereE87UvtmAopC2e1ir2HBfEXba1ItFK0bcA4FAc43ccEb+zD2wmGBGNa72/1nsdzMlYSBSkjsqa4tRJzh3jWstp9RHrkQ8cBVcsFZgmFA1ihGQD6AFIJKhfV1AV4/NTQLgxgINLrt9NHNewRALNCaa9VrIRqZLVZGfJ37+22GdiHlqtYD7zfm4jHLJOG2BfrmGAbUgOmo9lDS6hA6mLAD4HpvY5kLHsRXaRo80yRfap1HFReWbbIrNw08vc7JPibiup6dC9pNe7z37Q2e9PSbPtHpXnckXsvqMunnZTC6UnpXfn5cCS66RrDzb4Z+F4xsGPv9CCs1g1Fk27o8tCzbkc960Jn5KS2Z6dhQvyQ2sTj3CUJOHg4pin2Roz7nn3OgyAlXrVEfQtNTAPd6fI3PU4dG2s8/+QZadJIXi4fOnTdm5w6VFEsRweYi83Mo5XzjyI+RNybS8PISdwgeAdHkegllLda8sUnJd/jZuZggn2nXrCEmOn4I7GXxi/6R6ALKe77HvNjzGnXST3iJer5h2/ZJI0h9OyQ8jR4Bi5Pcc9aZP9dUfYeimr/o8a7dfShqi7h2nnHNfbEIMw8Sn4JOaZp6rDZHoUHSeDPevMXYLtCMJrN1ui3Y9HQWcGfzomgtqdefg2qV4vDgK7fI9OcGAX3bxCF90wuq/UQtjdpIn4qUknRgS2et1XHt1DVIU08Si2HxFEYEM/2Q5Kg0whnzIrDwHcjoJvzG3dxpMXo8fw6jSW2q8ECWsI4sax1S/7cT1vPUmJgvUVjaYcTUGyzsuWLWGCBFfPYRhiEnk88xoHELMEr1/HBY6ET7wNzDhZYt/mJEHgS5/PAeBnLgI09TDiHmzgIXbpyq+i4M7hx3Qt/zB7OheOPsOOu3zBGp7J6uJ6zE5vz1Jpztm2FbgxzlP6zehT5Wf+usF5H48xReHQcBvtiHIUViunc2wZPxuet3H637d46WM/p0YzPvaOyaZ2O+hP9fWoLOVNsXtO8nOPyf7YJyAKaVZv3uWbFOd/r65Wl6QOPz22SqR8OFupS4AYOA2YTbEli4oETqkc1EbFiFqW+jwcOGr+iLlVm91cVpjW50gIXgjkEWRBZUbTyk7K57HQnjBi9iBLPK0zBqQwZT5z9qow92d+HjP3wbd9Uv1Gyfp+3pezp61Iffrs5ztT+OeRxt39tWr7rPsWu6X393HPGwOFWkoScJEAd4sVBQiKHpyTGw0jMbMqQRc/J0LcCzTvk8rPSs9/v/Xr6kJ4/bD+/qfft59x/eLVb3xu8Ie9+/As=<\/diagram><\/mxfile>&quot;,&quot;resize&quot;:true}"></div>
+<p></p><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;<mxfile agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/20.6.2 Chrome/106.0.5249.199 Electron/21.3.3 Safari/537.36\&quot; etag=\&quot;osHGeEsAQtQwx1a6leBx\&quot; host=\&quot;Electron\&quot; modified=\&quot;2022-12-22T12:30:28.899Z\&quot; pages=\&quot;1\&quot; type=\&quot;device\&quot; version=\&quot;20.6.2\&quot;><diagram id=\&quot;wNleSp8rjk_RZLYBW_x9\&quot; name=\&quot;Page-1\&quot;>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<\/diagram><\/mxfile>&quot;,&quot;resize&quot;:true}"></div>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Nasdanika/drawio@dev/src/main/webapp/js/viewer-static.min.js"></script>
 <p></p>
 <ul>
-<li>Semantic link to Product 1: <a title="A long multi-line tooltip. For testing how it is rendered. " href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a></li>
-<li>Semantic link to Product 1 with different text: <a title="A long multi-line tooltip. For testing how it is rendered. " href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Prd-1</a></li>
+<li>Semantic link to Product 1: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html" title="A long multi-line tooltip. For testing how it is rendered. " data-nsd-label-uuid="69722705-19c2-4857-840d-b911f80c8436">Product 1</a></li>
+<li>Semantic link to Product 1 with different text: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html" title="A long multi-line tooltip. For testing how it is rendered. " data-nsd-label-uuid="69722705-19c2-4857-840d-b911f80c8436">Product 1</a></li>
 <li>Semantic reference: children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html</li>
 <li>Link with semantic reference: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a></li>
-<li>Relative semantic link to Product 1: <a title="A long multi-line tooltip. For testing how it is rendered. " href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a></li>
+<li>Relative semantic link to Product 1: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html" title="A long multi-line tooltip. For testing how it is rendered. " data-nsd-label-uuid="69722705-19c2-4857-840d-b911f80c8436">Product 1</a></li>
 <li>Link with relative semantic reference: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a></li>
 </ul>
 <h2><a href="#table-of-contents" id="table-of-contents">Table of Contents</a></h2>
 <ol>
-  <li>Business Capabilities - Business capabilities are building blocks for offerings.
+  <li>
+    <a href="children/business-capabilties/index.html">Business Capabilities</a> - Business capabilities are building blocks for offerings.
     <ol>
-      <li>Business Capability 1
+      <li>
+        <a href="children/business-capabilties/children/business-capability-one/index.html">Business Capability 1</a> - Business Capability 1 tooltip
         <ol></ol></li>
       <li>Business Capability 2
         <ol></ol></li>
     </ol></li>
   <li>Customer
     <ol></ol></li>
-  <li>Infrastructure
+  <li>
+    <a href="children/infrastructure/index.html">Infrastructure</a>
     <ol>
-      <li>Cloud
+      <li>
+        <a href="children/infrastructure/children/cloud/index.html">Cloud</a>
         <ol>
           <li>On Prem
             <ol>
@@ -156,9 +160,11 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
                     <ol></ol></li>
                 </ol></li>
             </ol></li>
-          <li>Public
+          <li>
+            <a href="children/infrastructure/children/cloud/children/public/index.html">Public</a>
             <ol>
-              <li>AWS
+              <li>
+                <a href="children/infrastructure/children/cloud/children/public/children/aws/index.html">AWS</a>
                 <ol></ol></li>
               <li>Azure
                 <ol></ol></li>
@@ -167,9 +173,11 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
             </ol></li>
         </ol></li>
     </ol></li>
-  <li>Offerings - Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.
+  <li>
+    <a href="children/F8-iYcjzHZroJMS6UX_3-5/index.html">Offerings</a> - Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.
     <ol>
-      <li>Product 1 - A long multi-line tooltip. For testing how it is rendered. Line after line, after line. Some lorem ipsum here. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+      <li>
+        <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a> - A long multi-line tooltip. For testing how it is rendered. Line after line, after line. Some lorem ipsum here. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
         <ol></ol></li>
       <li>Service 1
         <ol></ol></li>
@@ -194,12 +202,12 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
         <div class="col nsd-app-footer">
           <ul class="nav nsd-app-footer-navs">
             <li class="nav-item">
-              <a href="https://github.com/Nasdanika/demo-drawio-actions" data-nsd-label-uuid="7b1d4ac8-34a6-4631-8aa8-c4cd3994b3c8" class="nav-link"><span class="fab fa-github nsd-app-label-icon"></span>Source</a>
+              <a href="https://github.com/Nasdanika/demo-drawio-actions" data-nsd-label-uuid="2e7fc8e8-c1cf-4e2b-998e-593936c8f6f6" class="nav-link"><span class="fab fa-github nsd-app-label-icon"></span>Source</a>
             </li>
             <li class="nav-item"><span class="navbar-text">&nbsp;•&nbsp;</span>
             </li>
             <li class="nav-item">
-              <a href="https://docs.nasdanika.org/modules/demos/modules/app-drawio/modules/actions/index.html" data-nsd-label-uuid="da549b8f-8889-4ee0-997e-39b3c287ac74" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Documentation</a>
+              <a href="https://docs.nasdanika.org/modules/demos/modules/app-drawio/modules/actions/index.html" data-nsd-label-uuid="1b16f5b5-eb84-4fdd-ab74-f2c9001b832a" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Documentation</a>
             </li>
           </ul>
         </div>

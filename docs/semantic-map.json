@@ -1,0 +1,46 @@
+{
+    "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public/children/aws": {
+        "location": "children/infrastructure/children/cloud/children/public/children/aws/index.html",
+        "text": "AWS"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/infrastructure": {
+        "location": "children/infrastructure/index.html",
+        "text": "Infrastructure"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/business-capabilties/children/business-capability-one": {
+        "tooltip": "Business Capability 1 tooltip",
+        "location": "children/business-capabilties/children/business-capability-one/index.html",
+        "text": "Business Capability 1"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6": {
+        "tooltip": "A long multi-line tooltip. For testing how it is rendered. ",
+        "location": "children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html",
+        "text": "Product 1"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud": {
+        "location": "children/infrastructure/children/cloud/index.html",
+        "text": "Cloud"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/business-capabilties": {
+        "tooltip": "Business capabilities are building blocks for offerings.",
+        "location": "children/business-capabilties/index.html",
+        "text": "Business Capabilities"
+    },
+    "nasdanika://demos/drawio/semantic-mapping": {
+        "location": "semantic-map.jsonindex.html",
+        "text": "Semantic Mapping Demo"
+    },
+    "mailto:someone@somewhere.com": {
+        "location": "semantic-map.jsonindex.html",
+        "text": "Semantic Mapping Demo"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public": {
+        "location": "children/infrastructure/children/cloud/children/public/index.html",
+        "text": "Public"
+    },
+    "nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5": {
+        "tooltip": "Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.",
+        "location": "children/F8-iYcjzHZroJMS6UX_3-5/index.html",
+        "text": "Offerings"
+    }
+}

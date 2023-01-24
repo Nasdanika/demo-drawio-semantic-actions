@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nasdanika.demo.drawio</groupId>
 	<artifactId>semantic-mapping</artifactId>
-	<version>2023.1.0</version>
+	<version>2023.1.1</version>
 	<packaging>jar</packaging>
 	<name>Drawio semantic mapping demo</name>
 	<description>Demo of semantic mappping of Drawio diagram to Ncore model.</description>
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>org.nasdanika.html</groupId>
 			<artifactId>app-model-gen</artifactId>
-			<version>2023.1.1</version>
+			<version>2023.1.2</version>
 		</dependency>
 
 		<dependency>
