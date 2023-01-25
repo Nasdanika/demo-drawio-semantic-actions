@@ -3,6 +3,7 @@ package org.nasdanika.demo.drawio.semanticmapping.tests;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,19 @@ public class TestDrawioSemanticMappingGenerator {
 				new File("target/model-doc"),
 				false);
 				
+		int errorCount = 0;
+		for (Entry<String, Collection<String>> ee: errors.entrySet()) {
+			System.err.println(ee.getKey());
+			for (String error: ee.getValue()) {
+				System.err.println("\t" + error);
+				++errorCount;
+			}
+		}
+		
+		System.out.println("There are " + errorCount + " site errors");
+		
 		if (!errors.isEmpty()) {
-			throw new ExecutionException("There are problems with pages: " + errors);
+			throw new ExecutionException("There are problems with pages: " + errorCount);
 		};
 		
 	}

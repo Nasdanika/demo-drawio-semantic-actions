@@ -27,11 +27,11 @@
         "text": "Business Capabilities"
     },
     "nasdanika://demos/drawio/semantic-mapping": {
-        "location": "semantic-map.jsonindex.html",
+        "location": "index.html",
         "text": "Semantic Mapping Demo"
     },
     "mailto:someone@somewhere.com": {
-        "location": "semantic-map.jsonindex.html",
+        "location": "index.html",
         "text": "Semantic Mapping Demo"
     },
     "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public": {

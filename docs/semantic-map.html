@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="EN">
   <head>
-    <title>Semantic Mapping Demo</title>
+    <title>Glossary</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css" id="nsd-bootstrap-theme-stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -78,18 +78,18 @@ window.nsdJsTreeSearchCallback = function(str, node) {
             <li class="nav-item">
               <a href="search.html" data-nsd-label-uuid="f2e68c53-03b3-4726-9720-3ab79f65ee75" class="nav-link"><span class="fas fa-search nsd-app-label-icon"></span>Search</a>
             </li>
-            <li class="nav-item">
-              <a href="semantic-map.html" data-nsd-label-uuid="a5c867c9-b50f-41c3-82c7-2ae28c706531" class="nav-link"><span class="fas fa-book nsd-app-label-icon"></span>Glossary</a>
+            <li class="nav-item"><span data-nsd-label-uuid="a5c867c9-b50f-41c3-82c7-2ae28c706531" class="navbar-text"><span class="fas fa-book nsd-app-label-icon"></span>Glossary</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="row">
         <div class="col nsd-app-navbar">
-          <ul class="navbar navbar-light navbar-expand-lg"><span data-nsd-label-uuid="ee174212-5bef-4cb1-8408-0d86de369b5d" class="navbar-brand">Semantic Mapping Demo</span>
-            <button type="button" data-toggle="collapse" data-target="#nsd_14" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+          <ul class="navbar navbar-light navbar-expand-lg">
+            <a href="index.html" data-nsd-label-uuid="ee174212-5bef-4cb1-8408-0d86de369b5d" class="navbar-brand">Semantic Mapping Demo</a>
+            <button type="button" data-toggle="collapse" data-target="#nsd_4g" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
             </button>
-            <div id="nsd_14" class="collapse navbar-collapse">
+            <div id="nsd_4g" class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                   <a href="info.html" data-nsd-label-uuid="e78ea868-a45b-4100-8386-9b10416a9d0d" class="nav-link"><span class="fas fa-info-circle nsd-app-label-icon"></span>Info</a>
@@ -107,10 +107,10 @@ window.nsdJsTreeSearchCallback = function(str, node) {
 $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(function(tree) { tree.state.filter = function(state) { delete state.core.selected; return state; };  tree.search.search_callback = function(searchStr, node) { if (typeof window.nsdJsTreeSearchCallback === 'function') return window.nsdJsTreeSearchCallback(searchStr, node); var sf = new $.vakata.search(searchStr, true, { caseSensitive : false, fuzzy : false }); return sf.search(node.text).isMatch; }; return tree; }({"core":{"data":[{"a_attr":{"onclick":"window.location='children/infrastructure/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/index.html';"},"children":[{"a_attr":{"onclick":"window.location='children/infrastructure/children/cloud/children/public/children/aws/index.html';"},"data-nsd-label-uuid":"7650511b-b7bf-49e1-a905-14b95bf9a537","id":"nsd-app-nav-item-a627853a7646aea7ad18aab12855dc7565d55f8fe47156ef3ca69157ff2382e8","text":"AWS","type":"leaf"}],"data-nsd-label-uuid":"b8936004-607f-4f43-8ec9-ddd9015d2508","id":"nsd-app-nav-item-e5cf47adc4f675c46839fbe500e2bd5640a39f0e760d1ad6a84ec9b2c9276382","text":"Public"}],"data-nsd-label-uuid":"370886c5-cba6-4c76-8818-fd027e392f07","id":"nsd-app-nav-item-37c0849dc212811722495bf5ffa992e26c7fbb3af81faed54b92bb38f86fd030","text":"Cloud"}],"data-nsd-label-uuid":"2dd1fc9a-5c50-4161-94be-4549c6cc6c08","id":"nsd-app-nav-item-39919fe674fb00d1b0156500a9618242ec559245286f4ed3f0cb0f13d3746f10","text":"Infrastructure"},{"a_attr":{"title":"Business capabilities are building blocks for offerings.","onclick":"window.location='children/business-capabilties/index.html';"},"children":[{"a_attr":{"title":"Business Capability 1 tooltip","onclick":"window.location='children/business-capabilties/children/business-capability-one/index.html';"},"data-nsd-label-uuid":"9132ebc9-301c-4249-88a9-c25bf402b711","id":"nsd-app-nav-item-3929b68de13afdab5de63ff793e856e267aa90a3159e6a5ebc1fcc20c2e134b1","text":"Business Capability 1","type":"leaf"}],"data-nsd-label-uuid":"26b60c6b-af3c-4a27-b598-b93c4633037e","id":"nsd-app-nav-item-164b4fb7b989bd7e1e5efcd394e53e4435a5ebf6a5792369fc9b6d98fbea562e","text":"Business Capabilities"},{"a_attr":{"title":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/index.html';"},"children":[{"a_attr":{"title":"A long multi-line tooltip. For testing how it is rendered. ","onclick":"window.location='children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html';"},"data-nsd-label-uuid":"d6d58b42-6262-47ba-a569-613b5d4ce102","id":"nsd-app-nav-item-eac645836a575f690aea173942c2332c762fae9d8f57a420b14dfd91be7c7f42","text":"Product 1","type":"leaf"}],"data-nsd-label-uuid":"1b3a49cf-477d-4481-83b4-8b7431ee063c","id":"nsd-app-nav-item-b2b02804f6ace97ded95fef4573251055875e5fb8e18b2a22981d3c9f45444d3","text":"Offerings"}]},"search":{"show_only_matches":true,"show_only_matches_children":true},"types":{"leaf":{"icon":"jstree-file"}},"plugins":["state","type","search"],"state":{"key":"8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel"}}));
 // Tokens: searchInputSelector, timer, treeSelector
 $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').keyup(function () {
-    if (window['nsd_jstTreeSearchTimer_nsd_1d']) { 
-		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_1d']); 
+    if (window['nsd_jstTreeSearchTimer_nsd_4p']) { 
+		clearTimeout(window['nsd_jstTreeSearchTimer_nsd_4p']); 
 	}
-    window['nsd_jstTreeSearchTimer_nsd_1d'] = setTimeout(function () {
+    window['nsd_jstTreeSearchTimer_nsd_4p'] = setTimeout(function () {
       var v = $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel_searchInput').val();
       $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-panel').jstree(true).search(v);
     }, 250);
@@ -118,82 +118,142 @@ $('#8d0d1ae58fc962ece6cfe56612fdc5f4fe685f61762212fec995859cf203f7de-navigation-
 
 });</script>
         </div>
-        <div data-nsd-label-uuid="ee174212-5bef-4cb1-8408-0d86de369b5d" class="col nsd-app-content-panel">
+        <div data-nsd-label-uuid="a5c867c9-b50f-41c3-82c7-2ae28c706531" class="col nsd-app-content-panel">
           <div class="container-fluid">
+            <div class="row nsd-app-content-panel-title-and-items-row">
+              <div class="col-auto">
+                <h1><span data-nsd-label-uuid="a5c867c9-b50f-41c3-82c7-2ae28c706531" class="nsd-app-content-panel-title"><span class="fas fa-book nsd-app-label-icon"></span>Glossary</span>
+                </h1>
+              </div>
+            </div>
             <div class="row nsd-app-content-panel-content-row">
               <div class="col">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col"><div class="markdown-body"><p>Doc</p>
-<p></p><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;<mxfile agent=\&quot;5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/20.7.4 Chrome/106.0.5249.199 Electron/21.3.3 Safari/537.36\&quot; etag=\&quot;0ETb2xcUza-v6rgFPwcK\&quot; host=\&quot;Electron\&quot; modified=\&quot;2023-01-25T16:20:36.451Z\&quot; pages=\&quot;1\&quot; type=\&quot;device\&quot; version=\&quot;20.7.4\&quot;><diagram id=\&quot;wNleSp8rjk_RZLYBW_x9\&quot; name=\&quot;Page-1\&quot;>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<\/diagram><\/mxfile>&quot;,&quot;resize&quot;:true}"></div>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Nasdanika/drawio@dev/src/main/webapp/js/viewer-static.min.js"></script>
-<p></p>
-<ul>
-<li>Semantic link to Product 1: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html" title="A long multi-line tooltip. For testing how it is rendered. " data-nsd-label-uuid="d6d58b42-6262-47ba-a569-613b5d4ce102">Product 1</a></li>
-<li>Semantic link to Product 1 with different text: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html" title="A long multi-line tooltip. For testing how it is rendered. " data-nsd-label-uuid="d6d58b42-6262-47ba-a569-613b5d4ce102">Product 1</a></li>
-<li>Semantic reference: children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html</li>
-<li>Link with semantic reference: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a></li>
-<li>Relative semantic link to Product 1: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html" title="A long multi-line tooltip. For testing how it is rendered. " data-nsd-label-uuid="d6d58b42-6262-47ba-a569-613b5d4ce102">Product 1</a></li>
-<li>Link with relative semantic reference: <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a></li>
-</ul>
-<h2><a href="#table-of-contents" id="table-of-contents">Table of Contents</a></h2>
-<ol>
-  <li>
-    <a href="children/business-capabilties/index.html">Business Capabilities</a> - Business capabilities are building blocks for offerings.
-    <ol>
-      <li>
-        <a href="children/business-capabilties/children/business-capability-one/index.html">Business Capability 1</a> - Business Capability 1 tooltip
-        <ol></ol></li>
-      <li>Business Capability 2
-        <ol></ol></li>
-    </ol></li>
-  <li>Customer
-    <ol></ol></li>
-  <li>
-    <a href="children/infrastructure/index.html">Infrastructure</a>
-    <ol>
-      <li>
-        <a href="children/infrastructure/children/cloud/index.html">Cloud</a>
-        <ol>
-          <li>On Prem
-            <ol>
-              <li>vCenter
-                <ol>
-                  <li>Kubernetes
-                    <ol></ol></li>
-                </ol></li>
-            </ol></li>
-          <li>
-            <a href="children/infrastructure/children/cloud/children/public/index.html">Public</a>
-            <ol>
-              <li>
-                <a href="children/infrastructure/children/cloud/children/public/children/aws/index.html">AWS</a>
-                <ol></ol></li>
-              <li>Azure
-                <ol></ol></li>
-              <li>GCP
-                <ol></ol></li>
-            </ol></li>
-        </ol></li>
-    </ol></li>
-  <li>
-    <a href="children/F8-iYcjzHZroJMS6UX_3-5/index.html">Offerings</a> - Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.
-    <ol>
-      <li>
-        <a href="children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html">Product 1</a> - A long multi-line tooltip. For testing how it is rendered. Line after line, after line. Some lorem ipsum here. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-        <ol></ol></li>
-      <li>Service 1
-        <ol></ol></li>
-    </ol></li>
-  <li>Technical Capabilities
-    <ol>
-      <li>Technical Capability 1
-        <ol></ol></li>
-      <li>Technical Capability 2
-        <ol></ol></li>
-    </ol></li>
-</ol>
-</div></div>
+                    <div class="col">     	<div id="semantic-map-app" class="container-fluid">
+     		<div class="row">
+     			<div class="col">
+					<b-form-group label="Filter" label-for="filter-input" label-cols-sm="auto" label-align-sm="right" label-size="sm" class="mb-0" description="You can use wildcards, e.g. 'foo*' or 'f*o'; title or content fields, e.g. 'title:foo* bar'; boosts, e.g. 'foo^10 bar'; fuzzy matches, e.g. 'foo~1'; and term presence, e.g. '+foo bar -baz'">
+			          <b-input-group size="sm">
+			            <b-form-input id="filter-input" v-model="filter" type="search" placeholder="Type to Search"></b-form-input>
+			
+			            <b-input-group-append>
+			              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+			            </b-input-group-append>
+			          </b-input-group>
+			        </b-form-group>
+			        
+				    <b-table striped hover :items="items" :fields="fields">
+				      <template #cell(element)="data">
+				        <a :href="data.value.location">
+					      	<span v-if="data.value.icon">
+					      		<img v-if="data.value.icon.includes('/')" :src="data.value.icon">
+					      		<i v-else :class="data.value.icon"></i>
+					      	</span>
+				        	{{data.value.text}}
+				        
+				      </a></template>	
+				      <template #cell(uris)="data">
+				      	<span v-if="data.value.length == 1">
+					        {{data.value[0].value}}
+					        <i class="far fa-copy nsd-copy-to-clipboard" style="cursor:pointer" title="Copy URI to clipboard" :onclick="data.value[0].onClick"></i> 
+				      	</span>
+				      	<ul v-else>
+				      		<li v-for="item in data.value">
+						        {{item.value}} <i class="far fa-copy nsd-copy-to-clipboard" style="cursor:pointer" title="Copy URI to clipboard" :onclick="item.onClick"></i> 
+				      		</li>
+				      	</ul>
+				      </template>	
+				    </b-table>
+	        	</div>
+	        </div>	        
+     	</div>
+     
+		<script>		      
+			new Vue({
+				  el: '#semantic-map-app',
+				  data: {
+			        	filter: null,
+			        	semanticMap: {"nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public/children/aws":{"location":"children/infrastructure/children/cloud/children/public/children/aws/index.html","text":"AWS"},"nasdanika://demos/drawio/semantic-mapping/children/infrastructure":{"location":"children/infrastructure/index.html","text":"Infrastructure"},"nasdanika://demos/drawio/semantic-mapping/children/business-capabilties/children/business-capability-one":{"tooltip":"Business Capability 1 tooltip","location":"children/business-capabilties/children/business-capability-one/index.html","text":"Business Capability 1"},"nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6":{"tooltip":"A long multi-line tooltip. For testing how it is rendered. ","location":"children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html","text":"Product 1"},"nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud":{"location":"children/infrastructure/children/cloud/index.html","text":"Cloud"},"nasdanika://demos/drawio/semantic-mapping/children/business-capabilties":{"tooltip":"Business capabilities are building blocks for offerings.","location":"children/business-capabilties/index.html","text":"Business Capabilities"},"nasdanika://demos/drawio/semantic-mapping":{"location":"index.html","text":"Semantic Mapping Demo"},"mailto:someone@somewhere.com":{"location":"index.html","text":"Semantic Mapping Demo"},"nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public":{"location":"children/infrastructure/children/cloud/children/public/index.html","text":"Public"},"nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5":{"tooltip":"Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.","location":"children/F8-iYcjzHZroJMS6UX_3-5/index.html","text":"Offerings"}},
+			        	fields: [
+			                {
+			                  key: 'element',
+			                  label: "Element",
+			                  sortable: false
+			                },
+			                {
+			                  key: 'uris',
+			                  label: "URI",
+			                  sortable: true
+			                },
+			                {
+			                  key: 'description',
+			                  label: 'Description',
+			                  sortable: true
+			                }
+			              ]
+				  },				  
+				  computed: {			
+					items: function() {
+						const grouped = {};
+						for (let uri in this.semanticMap) {
+							let semanticEntry = this.semanticMap[uri];
+							let group = grouped[semanticEntry.location];
+							if (!group) {
+								group = {
+									uris: [],
+									description: semanticEntry.tooltip,
+									element: {
+										location: semanticEntry.location,
+										text: semanticEntry.text,
+										icon: semanticEntry.icon
+									}
+								};
+								grouped[semanticEntry.location] = group;
+							}
+							group.uris.push({
+								value: uri,
+								onClick: "navigator.clipboard.writeText('" + uri +"')"							
+							});
+						}						
+						
+						const ret = []; 
+						for (let location in grouped) {
+							ret.push(grouped[location]);
+						}
+						
+						return ret.filter(item => {
+							if (this.filter) {
+								for (let uriItem in item.uris) {
+									let uri = item.uris[uriItem].value;
+									if (uri && uri.toLowerCase().includes(this.filter.toLowerCase())) {
+										return true;
+									}									
+								}
+								if (item.description && item.description.toLowerCase().includes(this.filter.toLowerCase())) {
+									return true;
+								}
+								if (item.element.text && item.element.text.toLowerCase().includes(this.filter.toLowerCase())) {
+									return true;
+								}
+								return false;
+							}
+							return true;
+						}).sort((a, b) => {
+							if (a.element.text) {
+								if (b.element.text) {
+									return a.element.text.localeCompare(b.element.text);
+								}					
+								return -1;
+							}
+							return 1;
+						}); 						
+					}
+				  }
+			});   			
+		</script>
+				
+		</div>
                   </div>
                 </div>
               </div>
