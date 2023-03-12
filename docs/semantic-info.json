@@ -1,0 +1,1122 @@
+[
+    {
+        "identifiers": [
+            "nasdanika://demos/drawio/semantic-mapping",
+            "mailto:someone@somewhere.com",
+            "uuid:0675ba73-0f4d-4e40-ac1a-63488a68d184"
+        ],
+        "name": "Semantic Mapping Demo",
+        "location": "index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "nasdanika://demos/drawio/semantic-mapping",
+                "mailto:someone@somewhere.com",
+                "uuid:0675ba73-0f4d-4e40-ac1a-63488a68d184"
+            ],
+            "name": "Semantic Mapping Demo"
+        },
+        "identifiers": [
+            "uuid:4efbab7f-589d-48c8-a904-fb35352787e2",
+            "nasdanika://demos/drawio/semantic-mapping/children/infrastructure"
+        ],
+        "name": "Infrastructure",
+        "location": "children/infrastructure/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:4efbab7f-589d-48c8-a904-fb35352787e2",
+                "nasdanika://demos/drawio/semantic-mapping/children/infrastructure"
+            ],
+            "name": "Infrastructure"
+        },
+        "identifiers": [
+            "uuid:dac6b668-dfed-4fc0-95d1-c5e376111a6e",
+            "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud"
+        ],
+        "name": "Cloud",
+        "location": "children/infrastructure/children/cloud/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:dac6b668-dfed-4fc0-95d1-c5e376111a6e",
+                "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud"
+            ],
+            "name": "Cloud"
+        },
+        "identifiers": [
+            "uuid:cdac70f1-6ce3-4451-90bc-62c43a890038",
+            "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public"
+        ],
+        "name": "Public",
+        "location": "children/infrastructure/children/cloud/children/public/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:cdac70f1-6ce3-4451-90bc-62c43a890038",
+                "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public"
+            ],
+            "name": "Public"
+        },
+        "identifiers": [
+            "nasdanika://demos/drawio/semantic-mapping/children/infrastructure/children/cloud/children/public/children/aws",
+            "uuid:a11004ad-7aa6-4157-997f-c95397de478e"
+        ],
+        "name": "AWS",
+        "location": "children/infrastructure/children/cloud/children/public/children/aws/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:9ffe85dd-a9cd-4a11-8cc1-282b671e1299"]
+        },
+        "identifiers": ["uuid:34ea1a4e-2802-4d75-a75f-44adf33bacc8"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/infrastructure/children/cloud/children/public/children/aws/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:6c421e9d-41e8-4910-8f43-7ccc243b8b20"]
+        },
+        "identifiers": ["uuid:9a57b8a8-b64d-4d60-ae8f-b69cfb2180fd"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:ca079727-233c-4095-a359-d5a6d8ae4e6c"]
+        },
+        "identifiers": ["uuid:662ec09a-b593-40f7-b383-7a11b306651a"],
+        "name": "model/infrastructure/cloud/public/aws.yml 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:05ea72c9-c44c-401f-aaa3-8814ad3e0603"]
+        },
+        "identifiers": ["uuid:8746d359-073a-4657-b091-f4f53f4a6704"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:70331013-e2fe-418f-8b45-e4e59b02df96"]
+        },
+        "identifiers": ["uuid:95c2ab87-604b-4664-973b-5a1e589dabdc"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/infrastructure/children/cloud/children/public/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:7e74a696-60a5-4d0a-abc6-c96393a7293c"]
+        },
+        "identifiers": ["uuid:781fc445-1db7-4f11-9b6c-636a45d162ab"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:152e4202-eab4-485d-82c8-6a9de1ec1c19"]
+        },
+        "identifiers": ["uuid:9c87bed1-7648-428f-8136-cf64855344ec"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:8509fce3-041b-459d-b627-176133fef7f8"]
+        },
+        "identifiers": ["uuid:df1ff4eb-b08a-4190-9029-cc35e155ed81"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:7e5a3e1c-15b7-4e5b-a1a0-ed812ca173ef"]
+        },
+        "identifiers": ["uuid:5ded6559-9241-41af-9900-de90e8b69076"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/infrastructure/children/cloud/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:b7c3f7e3-a06d-4217-8d15-fb513f55afae"]
+        },
+        "identifiers": ["uuid:852f52f0-d209-43ad-b90e-e4dcb1fd63d3"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:3201dbe0-b7a2-41ac-806b-0e29703f62a2"]
+        },
+        "identifiers": ["uuid:94a5e646-d308-477e-b3d0-68b6198c4f2a"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:8fcfd408-9b19-45f7-b223-f7325c120dcb"]
+        },
+        "identifiers": ["uuid:f4ed3aae-3bdc-45fd-a28b-62bae342add0"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:72d5cf6b-b7f3-4f1e-b602-1ed1de03ee60"]
+        },
+        "identifiers": ["uuid:6fe5ba1f-511e-4e1d-bcbd-60697090b9d9"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/infrastructure/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:53cf3660-038b-440d-8a4d-9421bbb3b533"]
+        },
+        "identifiers": ["uuid:e902d290-3c48-47fd-bdd8-ef114fb651df"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:7b93c043-3db2-407a-bf49-b944c4dd5b96"]
+        },
+        "identifiers": ["uuid:4c4a0e7b-23e6-4a07-9d5f-898dac3aa8dc"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:5cf9a094-ea2e-4e46-87d1-2b477f1f61e4"]
+        },
+        "identifiers": ["uuid:f829b96a-b596-40cb-a15c-b4bcb4b9e549"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "nasdanika://demos/drawio/semantic-mapping",
+                "mailto:someone@somewhere.com",
+                "uuid:0675ba73-0f4d-4e40-ac1a-63488a68d184"
+            ],
+            "name": "Semantic Mapping Demo"
+        },
+        "identifiers": [
+            "nasdanika://demos/drawio/semantic-mapping/children/business-capabilties",
+            "uuid:e9e0941f-cf69-4872-a10b-85a61617dec5"
+        ],
+        "name": "Business Capabilities",
+        "description": "Business capabilities are building blocks for offerings.",
+        "location": "children/business-capabilties/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "nasdanika://demos/drawio/semantic-mapping/children/business-capabilties",
+                "uuid:e9e0941f-cf69-4872-a10b-85a61617dec5"
+            ],
+            "name": "Business Capabilities"
+        },
+        "identifiers": [
+            "uuid:eb07c43d-b786-4835-ac8b-041460906c3a",
+            "nasdanika://demos/drawio/semantic-mapping/children/business-capabilties/children/business-capability-one"
+        ],
+        "name": "Business Capability 1",
+        "description": "Business Capability 1 tooltip",
+        "location": "children/business-capabilties/children/business-capability-one/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:917d9ab6-9d71-440e-9b94-8a516172e04c"]
+        },
+        "identifiers": ["uuid:29aaabed-e90f-4507-b835-91271ca31613"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/business-capabilties/children/business-capability-one/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:68a2b5c6-5a85-460e-9cdf-513aa6c67bca"]
+        },
+        "identifiers": ["uuid:c3dce801-b24f-4aae-964a-8a97509fb7f3"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:3be3416a-5e3c-46de-89d5-cbe9eb539629"]
+        },
+        "identifiers": ["uuid:cbd0e5d2-7a1d-4b26-852c-64db23cbc5a8"],
+        "name": "model/business-capabilities/business-capability-1/business-capability-1.yml 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:953d9383-53a2-4f03-bd1f-3e418d159fba"]
+        },
+        "identifiers": ["uuid:22d04295-ec8f-446f-8d23-64e656422dbc"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:335dd431-0b03-4936-a845-a8a6afc06077"]
+        },
+        "identifiers": ["uuid:9a6bad5a-0cdc-4992-9a0c-d0084aa80657"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/business-capabilties/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:fd63bc7f-59b9-4fc7-b26f-25d1296a8c19"]
+        },
+        "identifiers": ["uuid:6cbf4f8f-2e55-4974-8024-8486abdaad83"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:fe274e56-eef4-4a2a-8f7b-f0e9cb9eebbf"]
+        },
+        "identifiers": ["uuid:842a11fc-2918-4903-ad7d-7a08591184b5"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:51f52ff4-beae-489a-b96b-0ce2ac8460e1"]
+        },
+        "identifiers": ["uuid:6c58f5a8-8d9d-4474-bd1c-41238998646d"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "nasdanika://demos/drawio/semantic-mapping",
+                "mailto:someone@somewhere.com",
+                "uuid:0675ba73-0f4d-4e40-ac1a-63488a68d184"
+            ],
+            "name": "Semantic Mapping Demo"
+        },
+        "identifiers": [
+            "uuid:e7fa6f1f-8e05-4c51-92e7-bbefaf0211e4",
+            "nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5"
+        ],
+        "name": "Offerings",
+        "description": "Products and services offered to customers. Offerings use other offerings and business capabilities as building blocks.",
+        "location": "children/F8-iYcjzHZroJMS6UX_3-5/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:e7fa6f1f-8e05-4c51-92e7-bbefaf0211e4",
+                "nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5"
+            ],
+            "name": "Offerings"
+        },
+        "identifiers": [
+            "uuid:c84968dc-fae8-4fdc-bea5-d034dae08d1d",
+            "nasdanika://demos/drawio/semantic-mapping/children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6"
+        ],
+        "name": "Product 1",
+        "description": "A long multi-line tooltip. For testing how it is rendered. ",
+        "location": "children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/index.html",
+        "type": {
+            "name": "Composite",
+            "ns-uri": "urn:org.nasdanika.ncore"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:70dc154d-583a-45dc-82b7-af5e8959ae86"]
+        },
+        "identifiers": ["uuid:ab5394ce-4027-4cbd-b464-2bc47ef479f6"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/F8-iYcjzHZroJMS6UX_3-5/children/F8-iYcjzHZroJMS6UX_3-6/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:6e60b4ae-2d9d-45a3-9cfd-a689fae03228"]
+        },
+        "identifiers": ["uuid:8fda5cea-a208-470b-91e2-e82c6b7f19f8"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:4a070df9-8d78-4771-b95b-550d2c76e8c4"]
+        },
+        "identifiers": ["uuid:15a015ef-c9b3-4013-993e-c0609ddfd42a"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:8de1111f-9150-4fdf-b0bf-faeee5827edb"]
+        },
+        "identifiers": ["uuid:a3c0a773-fa0d-487f-ba87-f84f6b749dff"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:edd26b5d-1eaa-421d-b685-a85859172da8"]
+        },
+        "identifiers": ["uuid:540a151c-559b-4bf4-9e55-aa4d488ac3a0"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "children/F8-iYcjzHZroJMS6UX_3-5/info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:6ae0a7d8-042e-4f34-8785-cab4b3a4d4de"]
+        },
+        "identifiers": ["uuid:fd2d41d7-7def-4806-9a70-72070c86d103"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:0acdf49e-2334-4263-8052-522f1c3af8e7"]
+        },
+        "identifiers": ["uuid:bb23fa9d-49c6-4c58-aa4d-bef98105c004"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:c4a8f56c-5a27-466f-bab6-4d7ae44fab69"]
+        },
+        "identifiers": ["uuid:e33bf665-64c4-4082-b898-0f65d6ddac61"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:d0051e22-4015-471c-986f-d801de126a78"]
+        },
+        "identifiers": ["uuid:e42acb4b-fd38-4ddb-a64f-016a5fc6c232"],
+        "name": "Info",
+        "icon": "fas fa-info-circle",
+        "location": "info.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:094cc195-f2d9-4d94-b4be-d9157eb892bf"]
+        },
+        "identifiers": ["uuid:53d19bc2-dff2-4327-a74a-78f474892e4f"],
+        "name": "Origin",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:c02d00dc-4c88-4cf7-842c-68eb345f6fd4"]
+        },
+        "identifiers": ["uuid:67ec2483-737f-4e17-b888-28e48ce535cc"],
+        "name": "model/high-level-architecture.drawio 1:1",
+        "icon": "fab fa-github",
+        "description": "refs/heads/main",
+        "type": {
+            "name": "Link",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "content",
+            "identifiers": ["uuid:1222dbc0-1926-411a-9d43-fd41729be131"]
+        },
+        "identifiers": ["uuid:28c9d213-f77d-447e-bc4a-b609820c05a2"],
+        "name": "Uris",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "identifiers": ["uuid:8db8e906-762e-4cb6-89fd-36f3a9e3d7d9"],
+        "name": "Nasdanika",
+        "icon": "https://docs.nasdanika.org/images/nasdanika-logo.png",
+        "description": "Root action",
+        "location": "https://www.nasdanika.org",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": ["uuid:8db8e906-762e-4cb6-89fd-36f3a9e3d7d9"]
+        },
+        "identifiers": [
+            "nasdanika://my-aws-solution",
+            "uuid:6df7fae8-4e86-4886-b635-457e11184266"
+        ],
+        "name": "My AWS Solution",
+        "icon": "fab fa-aws",
+        "description": "Principal action",
+        "location": "https://docs.nasdanika.org/demo-action-site/index.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "nasdanika://my-aws-solution",
+                "uuid:6df7fae8-4e86-4886-b635-457e11184266"
+            ]
+        },
+        "identifiers": [
+            "aws://cloud",
+            "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+        ],
+        "name": "AWS Cloud",
+        "icon": "fas fa-cloud",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/index.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "aws://services/s3",
+            "uuid:f1abc175-b138-41f4-9e59-d187e721c9a4"
+        ],
+        "name": "S3 Bucket",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/s3.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "uuid:c7734835-b2cc-45c2-a16b-3f133a137b41",
+            "aws://services/code-pipeline"
+        ],
+        "name": "CodePipeline",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/code-pipeline.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "uuid:c5ba0132-9b8e-476b-8de7-8f2adba3c37b",
+            "aws://cloud/children/2"
+        ],
+        "name": "Organizations",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/organizations.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "uuid:0abe3b2a-4186-450e-8f92-1c0008ec39c2",
+            "aws://cloud/children/3"
+        ],
+        "name": "Single Sign-on",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/sso.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "aws://cloud/children/4",
+            "uuid:4e47e473-560f-434f-8de7-af3c3a07f1bc"
+        ],
+        "name": "Account Baseline",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/account-baseline.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "aws://cloud/children/5",
+            "uuid:dd98fb25-6db2-4f1b-823d-68deebf35e87"
+        ],
+        "name": "Service Catalog",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/service-catalog.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "aws://cloud/children/6",
+            "uuid:30f01107-1144-488a-ba40-9d158d4e040e"
+        ],
+        "name": "Parameter Store",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/parameter-store.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "aws://cloud",
+                "uuid:986a003f-cbb1-4322-bd8d-5d1e9056be91"
+            ]
+        },
+        "identifiers": [
+            "aws://cloud/core-ou",
+            "uuid:42444659-b1f0-49a0-a8ef-ae3cd2cadc89"
+        ],
+        "name": "Core OU",
+        "location": "https://docs.nasdanika.org/demo-action-site/cloud/core-ou.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "nasdanika://my-aws-solution",
+                "uuid:6df7fae8-4e86-4886-b635-457e11184266"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts",
+            "uuid:b2a78547-6564-41d0-85b6-6fc564bcbefb"
+        ],
+        "name": "Accounts",
+        "type": {
+            "name": "Label",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "my-solution://accounts",
+                "uuid:b2a78547-6564-41d0-85b6-6fc564bcbefb"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/shared-services",
+            "uuid:a310363c-180c-4578-9823-bbd9531c492b"
+        ],
+        "name": "Shared Services",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/shared-services/index.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "my-solution://accounts/shared-services",
+                "uuid:a310363c-180c-4578-9823-bbd9531c492b"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/shared-services/children/0",
+            "uuid:f4b01ea1-92a5-4206-8e2b-73d01c5f282f"
+        ],
+        "name": "Account Baseline",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/shared-services/account-baseline.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "my-solution://accounts/shared-services",
+                "uuid:a310363c-180c-4578-9823-bbd9531c492b"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/shared-services/children/1",
+            "uuid:9173f80b-32f9-45b4-96ec-e19af79e6a11"
+        ],
+        "name": "VPC",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/shared-services/vpc.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "my-solution://accounts",
+                "uuid:b2a78547-6564-41d0-85b6-6fc564bcbefb"
+            ]
+        },
+        "identifiers": [
+            "uuid:1b932736-5d29-48cd-8b9e-7e1f12fc543a",
+            "my-solution://accounts/children/1"
+        ],
+        "name": "Log Archive",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/log-archive/index.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:1b932736-5d29-48cd-8b9e-7e1f12fc543a",
+                "my-solution://accounts/children/1"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/children/1/children/0",
+            "uuid:b56d3559-55bf-416a-b386-fcb9106e843e"
+        ],
+        "name": "Account Baseline",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/log-archive/account-baseline.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:1b932736-5d29-48cd-8b9e-7e1f12fc543a",
+                "my-solution://accounts/children/1"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/children/1/children/1",
+            "uuid:9daac284-b068-499a-8773-2e2e61599218"
+        ],
+        "name": "Aggregate CloudTrail and Config Logs",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/log-archive/cloud-trail-and-config-logs.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "my-solution://accounts",
+                "uuid:b2a78547-6564-41d0-85b6-6fc564bcbefb"
+            ]
+        },
+        "identifiers": [
+            "uuid:c89caf3c-96b3-46f0-8b3b-dab053f5c689",
+            "my-solution://accounts/children/2"
+        ],
+        "name": "Security",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/security/index.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:c89caf3c-96b3-46f0-8b3b-dab053f5c689",
+                "my-solution://accounts/children/2"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/children/2/children/0",
+            "uuid:9a5115a4-3597-4f75-a433-9ee9087ea7da"
+        ],
+        "name": "Account Baseline",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/security/account-baseline.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:c89caf3c-96b3-46f0-8b3b-dab053f5c689",
+                "my-solution://accounts/children/2"
+            ]
+        },
+        "identifiers": [
+            "uuid:0b249d99-48cf-4e34-b59e-c700239f1e32",
+            "my-solution://accounts/children/2/children/1"
+        ],
+        "name": "Security Cross-Account Roles",
+        "icon": "fas fa-key",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/security/security-cross-account-roles.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:c89caf3c-96b3-46f0-8b3b-dab053f5c689",
+                "my-solution://accounts/children/2"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/children/2/children/2",
+            "uuid:bc443437-e8c6-420b-8ffb-93f78465a5e8"
+        ],
+        "name": "GuardDuty",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/security/guard-duty.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": [
+                "uuid:c89caf3c-96b3-46f0-8b3b-dab053f5c689",
+                "my-solution://accounts/children/2"
+            ]
+        },
+        "identifiers": [
+            "my-solution://accounts/children/2/children/3",
+            "uuid:70885e97-32a4-4afe-a142-c54a96286a70"
+        ],
+        "name": "SNS",
+        "description": "Simple Notification Service",
+        "location": "https://docs.nasdanika.org/demo-action-site/accounts/security/sns.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": ["uuid:8db8e906-762e-4cb6-89fd-36f3a9e3d7d9"]
+        },
+        "identifiers": ["uuid:c9ac16fb-9abb-4368-91a2-6ff37dd7fbf9"],
+        "name": "Search",
+        "icon": "fas fa-search",
+        "location": "https://docs.nasdanika.org/demo-action-site/search.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "children",
+            "identifiers": ["uuid:8db8e906-762e-4cb6-89fd-36f3a9e3d7d9"]
+        },
+        "identifiers": ["uuid:9517b16c-5099-4993-827b-976715e2dbbf"],
+        "name": "Glossary",
+        "icon": "fas fa-book",
+        "location": "https://docs.nasdanika.org/demo-action-site/glossary.html",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    },
+    {
+        "container": {
+            "reference": "navigation",
+            "identifiers": ["uuid:8db8e906-762e-4cb6-89fd-36f3a9e3d7d9"]
+        },
+        "identifiers": ["uuid:b7583c7e-ff4a-46a4-82bb-9c66d181807a"],
+        "name": "Source",
+        "icon": "fab fa-github",
+        "location": "https://github.com/Nasdanika/demo-action-site",
+        "type": {
+            "name": "Action",
+            "ns-uri": "urn:org.nasdanika.html.model.app"
+        }
+    }
+]
